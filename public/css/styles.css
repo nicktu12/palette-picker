@@ -7,15 +7,22 @@ h1 {
   line-height: 15vh; }
 
 .palette {
-  background-color: pink;
   display: flex;
   flex-direction: row;
   justify-content: space-around; }
 
 .palette div {
-  border: 1px solid black;
   width: 100%;
-  height: 35vh; }
+  height: 35vh;
+  box-sizing: border-box;
+  position: relative; }
+
+.palette button {
+  position: absolute;
+  bottom: 0;
+  left: 40%;
+  margin: 0px;
+  width: 25%; }
 
 .projects {
   display: flex;
