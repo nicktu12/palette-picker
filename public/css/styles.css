@@ -1,4 +1,33 @@
 * {
-  background-color: blue; }
+  padding: 0;
+  margin: 0;
+  text-align: center; }
+
+h1 {
+  line-height: 15vh; }
+
+.palette {
+  background-color: pink;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
+.palette div {
+  border: 1px solid black;
+  width: 100%;
+  height: 35vh; }
+
+.projects {
+  display: flex;
+  flex-wrap: wrap; }
+
+.projects div {
+  width: 33vw; }
+
+button {
+  margin: 25px; }
+
+form {
+  margin: 25px; }
 
 /*# sourceMappingURL=styles.css.map */
