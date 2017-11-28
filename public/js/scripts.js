@@ -12,9 +12,13 @@ function assignRandomColors() {
   console.log($('.color-1'))
   for (let i = 1; i < 6; i++) {
     let color = getRandomColor();
-    $(`.color-${i}`).text(color);
+    $(`.color-${i}-text`).text(color);
     $(`.color-${i}`).css('background-color', color)
   }
+}
+
+function lockColor() {
+  $(this).parent().toggleClass('lock');
 }
 
 $(document).ready(() => {
@@ -22,3 +26,4 @@ $(document).ready(() => {
 });
 
 $('.new-colors').on('click', assignRandomColors);
+$('.lock-button').on('click', lockColor);
