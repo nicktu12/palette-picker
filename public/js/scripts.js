@@ -8,4 +8,16 @@ function getRandomColor() {
     return color;
 }
 
-getRandomColor();
+function assignRandomColors() {
+  console.log($('.color-1'))
+  for (let i = 1; i < 6; i++) {
+    let color = getRandomColor();
+    $(`.color-${i}`).css('background-color', color)
+  }
+}
+
+$(document).ready(() => {
+    assignRandomColors();
+});
+
+$('.new-colors').on('click', assignRandomColors);
