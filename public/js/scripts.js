@@ -25,20 +25,38 @@ function lockColor() {
 
 function saveProject(event) {
   event.preventDefault();
-  console.log('asdf')
+  const projectName = $('.save-palette-input').val()
   fetch('/api/v1/projects', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name: 'test' })
+    body: JSON.stringify({ name: projectName })
   })
   .then(response => {
     if (response.status === 201) {
       return response.json()
     }
   })
+  .catch(error => console.log({ error }))
+  $('.save-palette-input').val('');
 }
+
+const projectsList = () => {
+  return fetch('/api/v1/projects', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify()
+  })
+}
+
+const listitems = '';
+//$.each(temp, function(key, value){
+  //      listitems += '<option value=' + key + '>' + value + '</option>';
+  //});
+// $select.append(listitems);
 
 $(document).ready(() => {
     assignRandomColors();
