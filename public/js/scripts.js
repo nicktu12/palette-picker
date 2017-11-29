@@ -11,9 +11,11 @@ function getRandomColor() {
 function assignRandomColors() {
   console.log($('.color-1'))
   for (let i = 1; i < 6; i++) {
-    let color = getRandomColor();
-    $(`.color-${i}-text`).text(color);
-    $(`.color-${i}`).css('background-color', color)
+    if (!$(`.color-${i}`).hasClass('lock')){
+      let color = getRandomColor();
+      $(`.color-${i}-text`).text(color);
+      $(`.color-${i}`).css('background-color', color)
+    }
   }
 }
 
