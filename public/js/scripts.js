@@ -11,14 +11,33 @@ function getRandomColor() {
 function assignRandomColors() {
   console.log($('.color-1'))
   for (let i = 1; i < 6; i++) {
-    let color = getRandomColor();
-    $(`.color-${i}-text`).text(color);
-    $(`.color-${i}`).css('background-color', color)
+    if (!$(`.color-${i}`).hasClass('lock')){
+      let color = getRandomColor();
+      $(`.color-${i}-text`).text(color);
+      $(`.color-${i}`).css('background-color', color)
+    }
   }
 }
 
 function lockColor() {
   $(this).parent().toggleClass('lock');
+}
+
+function saveProject(event) {
+  event.preventDefault();
+  console.log('asdf')
+  fetch('/api/v1/projects', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: 'test' })
+  })
+  .then(response => {
+    if (response.status === 201) {
+      return response.json()
+    }
+  })
 }
 
 $(document).ready(() => {
@@ -27,3 +46,4 @@ $(document).ready(() => {
 
 $('.new-colors').on('click', assignRandomColors);
 $('.lock-button').on('click', lockColor);
+$('.save-project').on('submit', saveProject);
