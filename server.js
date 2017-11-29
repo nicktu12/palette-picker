@@ -39,5 +39,14 @@ app.post('/api/v1/palettes', (request, response) => {
 
   app.locals.palettes.push(palette);
 
-  response.status(201).json({ id, message });
+  response.status(201).json({ id, palette });
 });
+
+app.post('/api/v1/projects', (request, response) => {
+  const id = Date.now();
+
+  const { project } = request.body;
+
+  app.locals.projects.push(project);
+  response.status(201).json({ id, project });
+})

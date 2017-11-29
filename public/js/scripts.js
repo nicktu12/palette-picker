@@ -23,9 +23,27 @@ function lockColor() {
   $(this).parent().toggleClass('lock');
 }
 
+function saveProject(event) {
+  event.preventDefault();
+  console.log('asdf')
+  fetch('/api/v1/projects', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: 'test' })
+  })
+  .then(response => {
+    if (response.status === 201) {
+      return response.json()
+    }
+  })
+}
+
 $(document).ready(() => {
     assignRandomColors();
 });
 
 $('.new-colors').on('click', assignRandomColors);
 $('.lock-button').on('click', lockColor);
+$('.save-project').on('submit', saveProject);
