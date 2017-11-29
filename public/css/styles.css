@@ -37,4 +37,7 @@ button {
 form {
   margin: 25px; }
 
+.lock button {
+  border: 3px solid red; }
+
 /*# sourceMappingURL=styles.css.map */
