@@ -28,7 +28,7 @@ h1 {
   display: flex;
   flex-wrap: wrap; }
 
-.projects div {
+.projects article {
   width: 33vw; }
 
 button {

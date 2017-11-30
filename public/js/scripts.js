@@ -25,23 +25,49 @@ function lockColor() {
 
 function saveProject(event) {
   event.preventDefault();
-  console.log('asdf')
+  const projectName = $('.save-palette-input').val()
   fetch('/api/v1/projects', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name: 'test' })
+    body: JSON.stringify({ name: projectName })
   })
   .then(response => {
     if (response.status === 201) {
       return response.json()
     }
   })
+  .then(fetchProjects())
+  .catch(error => console.log({ error }))
+  $('.save-palette-input').val('');
+  $('.projects').html('');
+}
+
+function fetchProjects() {
+  fetch('/api/v1/projects')
+    .then(response=> response.json())
+    .then(projects=>{
+      projects.forEach(project=>{
+        appendToDom(project);
+      })
+    })
+}
+
+function appendToDom(fetchResult) {
+  const projectName = `<option value=${fetchResult.id}>${fetchResult.name}</option>`;
+  const project = `
+    <article>
+      <h3>${fetchResult.name}</h3>
+    </article>
+  `;
+  $('.projects').append(project)
+  $('.project-drop-down').append(projectName)
 }
 
 $(document).ready(() => {
-    assignRandomColors();
+  assignRandomColors();
+  fetchProjects();
 });
 
 $('.new-colors').on('click', assignRandomColors);
