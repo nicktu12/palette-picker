@@ -13,11 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Palette Picker';
-app.locals.palettes = [
-  { id: 'a1', palette: ['color1', 'color2', 'color3', 'color4', 'color5'] },
-  { id: 'a2', palette: ['color1', 'color2', 'color3', 'color4', 'color5'] },
-];
-app.locals.projects = [{id: 'test'}];
 
 app.get('/', (request, response) => {
   response.send(`What's good palette people?`);
@@ -25,16 +20,6 @@ app.get('/', (request, response) => {
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
-});
-
-app.get('/api/v1/palettes', (request, response) => {
-  database('palettes').select()
-    .then(palettes=>{
-      return response.status(200).json(palettes);
-    })
-    .catch(error =>{
-      response.status(500).json({ error });
-    });
 });
 
 app.post('/api/v1/projects', (request, response) => {
@@ -68,6 +53,17 @@ app.get('/api/v1/projects', (request, response) => {
     });
 });
 
+app.get('/api/v1/projects/:id/palettes', (request, response) => {
+  const { id } = request.params;
+
+  database('palettes').where({ projectId: id }).select()
+    .then(palettes=>{
+      return response.status(200).json(palettes);
+    })
+    .catch(error =>{
+      response.status(500).json({ error });
+    });
+});
 
 //app.get('/api/v1/projects', (request, response) => {
 //  const projects = app.locals.projects;

@@ -50,17 +50,33 @@ function fetchProjects() {
     .then(response=> response.json())
     .then(projects=>{
       projects.forEach(project=>{
+        fetchPalettes(project.id);
         appendToDom(project);
       });
     });
 }
 
-function appendToDom(fetchResult) {
+function fetchPalettes(projectId) {
+  fetch(`/api/v1/projects/${projectId}/palettes`)
+    .then(response=> response.json())
+    .then(palettes=>{
+      palettes.forEach(palette=>{
+        console.log(palette)
+      });
+    });
+}
+
+function appendToDom(fetchedProject, fetchedPalettes) {
   const projectName =
-    `<option value=${fetchResult.id}>${fetchResult.name}</option>`;
+    `<option value=${fetchedProject.id}>${fetchedProject.name}</option>`;
+  const palettes = '';
+  // fetchedPalettes.forEach(palette=>{
+  //  palettes += 
+  //})
   const project = `
     <article>
-      <h3>${fetchResult.name}</h3>
+      <h3>${fetchedProject.name}</h3>
+      <div class="append-palette"></div>
     </article>
   `;
   $('.projects').append(project);
