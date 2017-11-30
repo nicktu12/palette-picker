@@ -8,7 +8,6 @@ function getRandomColor() {
 }
 
 function assignRandomColors() {
-  console.log($('.color-1'))
   for (let i = 1; i < 6; i++) {
     if (!$(`.color-${i}`).hasClass('lock')){
       let color = getRandomColor();
