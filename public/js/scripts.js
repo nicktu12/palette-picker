@@ -23,7 +23,7 @@ function lockColor() {
 
 function saveProject(event) {
   event.preventDefault();
-  const projectName = $('.save-palette-input').val();
+  const projectName = $('.save-project-input').val();
   fetch('/api/v1/projects', {
     method: 'POST',
     headers: {
@@ -37,7 +37,7 @@ function saveProject(event) {
       }
     })
     .then(()=>{
-      $('.save-palette-input').val('');
+      $('.save-project-input').val('');
       $('.projects').html('');
       $('.project-drop-down').html('');
       fetchProjects();
@@ -45,42 +45,53 @@ function saveProject(event) {
     .catch(error => console.log({ error }));
 }
 
+function savePalette(event) {
+  event.preventDefault();
+  const paletteName = $('.save-palette-input').val();
+  console.log(paletteName)
+}
+
 function fetchProjects() {
   fetch('/api/v1/projects')
     .then(response=> response.json())
     .then(projects=>{
       projects.forEach(project=>{
-        fetchPalettes(project.id);
-        appendToDom(project);
+        appendProjects(project);
+        fetch(`/api/v1/projects/${project.id}/palettes`)
+          .then(response=>response.json())
+          .then(palettes=>appendPalettes(palettes, project.id))
       });
     });
 }
 
-function fetchPalettes(projectId) {
-  fetch(`/api/v1/projects/${projectId}/palettes`)
-    .then(response=> response.json())
-    .then(palettes=>{
-      palettes.forEach(palette=>{
-        console.log(palette)
-      });
-    });
-}
-
-function appendToDom(fetchedProject, fetchedPalettes) {
+function appendProjects(fetchedProject) {
   const projectName =
     `<option value=${fetchedProject.id}>${fetchedProject.name}</option>`;
-  const palettes = '';
-  // fetchedPalettes.forEach(palette=>{
-  //  palettes += 
-  //})
   const project = `
     <article>
       <h3>${fetchedProject.name}</h3>
-      <div class="append-palette"></div>
+      <div class="append-palette-${fetchedProject.id}"></div>
     </article>
   `;
   $('.projects').append(project);
   $('.project-drop-down').append(projectName);
+}
+
+function appendPalettes(palettesArray, projectId) {
+  palettesArray.forEach(palette=>{
+    const paletteName = palette.name;
+    const projectPalettes = `
+      <div>
+        <p>${paletteName}</p>
+        <div style='background-color: ${palette.color1}'>d</div>
+        <div style='background-color: ${palette.color2}'>d</div>
+        <div style='background-color: ${palette.color3}'>d</div>
+        <div style='background-color: ${palette.color4}'>d</div>
+        <div style='background-color: ${palette.color5}'>d</div>
+      </div>
+    `;
+  $(`.append-palette-${projectId}`).append(projectPalettes);
+  })
 }
 
 $(document).ready(() => {
@@ -91,3 +102,4 @@ $(document).ready(() => {
 $('.new-colors').on('click', assignRandomColors);
 $('.lock-button').on('click', lockColor);
 $('.save-project').on('submit', saveProject);
+$('.save-palette').on('submit', savePalette);
