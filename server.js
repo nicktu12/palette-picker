@@ -90,3 +90,5 @@ app.get('/api/v1/projects/:id/palettes', (request, response) => {
 //  app.locals.projects.push(project);
 //  response.status(201).json({ id, project });
 //})
+//
+module.exports = app;
