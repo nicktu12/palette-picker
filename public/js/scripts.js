@@ -1,10 +1,10 @@
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-    return color;
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 function assignRandomColors() {
@@ -12,7 +12,7 @@ function assignRandomColors() {
     if (!$(`.color-${i}`).hasClass('lock')){
       let color = getRandomColor();
       $(`.color-${i}-text`).text(color);
-      $(`.color-${i}`).css('background-color', color)
+      $(`.color-${i}`).css('background-color', color);
     }
   }
 }
@@ -23,7 +23,7 @@ function lockColor() {
 
 function saveProject(event) {
   event.preventDefault();
-  const projectName = $('.save-palette-input').val()
+  const projectName = $('.save-palette-input').val();
   fetch('/api/v1/projects', {
     method: 'POST',
     headers: {
@@ -31,18 +31,18 @@ function saveProject(event) {
     },
     body: JSON.stringify({ name: projectName })
   })
-  .then(response => {
-    if (response.status === 201) {
-      return response.json()
-    }
-  })
-  .then(()=>{
-    $('.save-palette-input').val('')
-    $('.projects').html('');
-    $('.project-drop-down').html('');
-    fetchProjects();
-  })
-  .catch(error => console.log({ error }))
+    .then(response => {
+      if (response.status === 201) {
+        return response.json();
+      }
+    })
+    .then(()=>{
+      $('.save-palette-input').val('');
+      $('.projects').html('');
+      $('.project-drop-down').html('');
+      fetchProjects();
+    })
+    .catch(error => console.log({ error }));
 }
 
 function fetchProjects() {
@@ -51,19 +51,20 @@ function fetchProjects() {
     .then(projects=>{
       projects.forEach(project=>{
         appendToDom(project);
-      })
-    })
+      });
+    });
 }
 
 function appendToDom(fetchResult) {
-  const projectName = `<option value=${fetchResult.id}>${fetchResult.name}</option>`;
+  const projectName =
+    `<option value=${fetchResult.id}>${fetchResult.name}</option>`;
   const project = `
     <article>
       <h3>${fetchResult.name}</h3>
     </article>
   `;
-  $('.projects').append(project)
-  $('.project-drop-down').append(projectName)
+  $('.projects').append(project);
+  $('.project-drop-down').append(projectName);
 }
 
 $(document).ready(() => {
