@@ -1,7 +1,7 @@
 
 exports.seed = function(knex, Promise) {
-  return knex('projects').del() // deletes all projects
-    .then(()=> knex('palettes').del()) // deletes all palettes
+  return knex('palettes').del() // deletes all projects
+    .then(()=> knex('projects').del()) // deletes all palettes
     .then(()=>{
       return Promise.all([
         knex('projects').insert({

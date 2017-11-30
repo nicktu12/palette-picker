@@ -38,28 +38,36 @@ function saveProject(event) {
       return response.json()
     }
   })
+  .then(fetchProjects())
   .catch(error => console.log({ error }))
   $('.save-palette-input').val('');
+  $('.projects').html('');
 }
 
-const projectsList = () => {
-  return fetch('/api/v1/projects', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify()
-  })
+function fetchProjects() {
+  fetch('/api/v1/projects')
+    .then(response=> response.json())
+    .then(projects=>{
+      projects.forEach(project=>{
+        appendToDom(project);
+      })
+    })
 }
 
-const listitems = '';
-//$.each(temp, function(key, value){
-  //      listitems += '<option value=' + key + '>' + value + '</option>';
-  //});
-// $select.append(listitems);
+function appendToDom(fetchResult) {
+  const projectName = `<option value=${fetchResult.id}>${fetchResult.name}</option>`;
+  const project = `
+    <article>
+      <h3>${fetchResult.name}</h3>
+    </article>
+  `;
+  $('.projects').append(project)
+  $('.project-drop-down').append(projectName)
+}
 
 $(document).ready(() => {
-    assignRandomColors();
+  assignRandomColors();
+  fetchProjects();
 });
 
 $('.new-colors').on('click', assignRandomColors);
