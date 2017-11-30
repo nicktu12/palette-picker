@@ -4,7 +4,6 @@ function getRandomColor() {
     for (var i = 0; i < 6; i++) {
           color += letters[Math.floor(Math.random() * 16)];
         }
-    console.log(color);
     return color;
 }
 
@@ -38,10 +37,13 @@ function saveProject(event) {
       return response.json()
     }
   })
-  .then(fetchProjects())
+  .then(()=>{
+    $('.save-palette-input').val('')
+    $('.projects').html('');
+    $('.project-drop-down').html('');
+    fetchProjects();
+  })
   .catch(error => console.log({ error }))
-  $('.save-palette-input').val('');
-  $('.projects').html('');
 }
 
 function fetchProjects() {
