@@ -86,7 +86,6 @@ app.get('/api/v1/projects/:id/palettes', (request, response) => {
 });
 
 app.delete('/api/v1/palettes/:id', (request, response)=>{
-  console.log('heyyyyyy', request.params.id)
   const { id } = request.params;
 
   database('palettes').where({ id }).del()
