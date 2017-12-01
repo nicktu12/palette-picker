@@ -108,13 +108,15 @@ function appendPalettes(palettesArray, projectId) {
     const paletteName = palette.name;
     const projectPalettes = `
       <section class='${palette.id}' data-colors='${JSON.stringify([palette.color1, palette.color2, palette.color3, palette.color4, palette.color5])}'>
-        <p>${paletteName}</p>
-        <div style='background-color: ${palette.color1}' class='palette-color-1'>d</div>
-        <div style='background-color: ${palette.color2}' class='palette-color-2'>d</div>
-        <div style='background-color: ${palette.color3}' class='palette-color-3'>d</div>
-        <div style='background-color: ${palette.color4}' class='palette-color-4'>d</div>
-        <div style='background-color: ${palette.color5}' class='palette-color-5'>d</div>
-        <button>Delete</button>
+        <p class="palette-name">${paletteName}</p>
+        <button class="delete-palette">Delete</button>
+        <div class="small-palettes-div">
+        <div style='background-color: ${palette.color1}' class='palette-color-1 small-palette'></div>
+        <div style='background-color: ${palette.color2}' class='palette-color-2 small-palette'></div>
+        <div style='background-color: ${palette.color3}' class='palette-color-3 small-palette'></div>
+        <div style='background-color: ${palette.color4}' class='palette-color-4 small-palette'></div>
+        <div style='background-color: ${palette.color5}' class='palette-color-5 small-palette'></div>
+        </div>
       </section>
     `;
   $(`.append-palette-${projectId}`).append(projectPalettes);
