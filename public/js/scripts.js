@@ -69,6 +69,7 @@ function savePalette(event) {
     })
     .then(()=>{
       $('.save-palette-input').val('');
+      $('.project-drop-down').html('');
       $('.projects').html('');
       fetchProjects();
     })
@@ -105,16 +106,37 @@ function appendPalettes(palettesArray, projectId) {
   palettesArray.forEach(palette=>{
     const paletteName = palette.name;
     const projectPalettes = `
-      <div>
+      <section class='${palette.id}' data-colors='${JSON.stringify([palette.color1, palette.color2, palette.color3, palette.color4, palette.color5])}'>
         <p>${paletteName}</p>
-        <div style='background-color: ${palette.color1}'>d</div>
-        <div style='background-color: ${palette.color2}'>d</div>
-        <div style='background-color: ${palette.color3}'>d</div>
-        <div style='background-color: ${palette.color4}'>d</div>
-        <div style='background-color: ${palette.color5}'>d</div>
-      </div>
+        <div style='background-color: ${palette.color1}' class='palette-color-1'>d</div>
+        <div style='background-color: ${palette.color2}' class='palette-color-2'>d</div>
+        <div style='background-color: ${palette.color3}' class='palette-color-3'>d</div>
+        <div style='background-color: ${palette.color4}' class='palette-color-4'>d</div>
+        <div style='background-color: ${palette.color5}' class='palette-color-5'>d</div>
+        <button>Delete</button>
+      </section>
     `;
   $(`.append-palette-${projectId}`).append(projectPalettes);
+  })
+}
+
+function deletePalette(){
+  console.log($(this).parent().prop('className'))
+  const id = $(this).parent().prop('className');
+
+  fetch(`/api/v1/palettes/${id}`, {
+    method: 'DELETE'
+  })
+  .then(()=>$(`.${id}`).remove())
+  .catch(error => console.log({ error }));
+}
+
+function displayPalette(){
+  const palette = $(event.target).closest('section');
+  const colors = JSON.parse(palette.attr('data-colors'))
+
+  colors.forEach((color, index)=>{
+    $(`.color-${index + 1}`).css('background-color', color)
   })
 }
 
@@ -127,3 +149,5 @@ $('.new-colors').on('click', assignRandomColors);
 $('.lock-button').on('click', lockColor);
 $('.save-project').on('submit', saveProject);
 $('.save-palette').on('submit', savePalette);
+$('.projects').on('click', 'button', deletePalette);
+$('.projects').on('click', 'section', displayPalette);

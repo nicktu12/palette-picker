@@ -85,6 +85,22 @@ app.get('/api/v1/projects/:id/palettes', (request, response) => {
     });
 });
 
+app.delete('/api/v1/palettes/:id', (request, response)=>{
+  console.log('heyyyyyy', request.params.id)
+  const { id } = request.params;
+
+  database('palettes').where({ id }).del()
+  .then(palette=>{
+    if(palette){
+      response.sendStatus(204);
+    } else {
+      response.status(422).json({ error: `No resource with an id of ${id} was found.` });
+    }
+  })
+  .catch(error=>{response.status(500).json({ error })
+  });
+})
+
 //app.get('/api/v1/projects', (request, response) => {
 //  const projects = app.locals.projects;
 //
