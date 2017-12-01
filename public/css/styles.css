@@ -9,7 +9,34 @@ h1 {
   font-size: 60px;
   text-shadow: -2px 0px white;
   position: absolute;
-  z-index: 1; }
+  z-index: 1;
+  padding-left: 10px; }
+
+.palette div p {
+  opacity: .5;
+  font-family: monospace;
+  font-size: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  left: 25%; }
+
+.lock-button img {
+  width: 16%;
+  padding-left: 4%;
+  display: none;
+  transition: all .5s; }
+
+.lock-button:hover img {
+  display: initial;
+  opacity: .3; }
+
+.lock:hover button img {
+  opacity: .5; }
+
+.lock button img {
+  display: initial;
+  opacity: .5; }
 
 .palette {
   display: flex;
@@ -18,9 +45,12 @@ h1 {
 
 .palette div {
   width: 100%;
-  height: 75vh;
+  height: 70vh;
   box-sizing: border-box;
   position: relative; }
+
+article div {
+  display: flex; }
 
 .palette button {
   position: absolute;
@@ -54,10 +84,39 @@ h1 {
 
 .projects {
   display: flex;
-  flex-wrap: wrap; }
+  justify-content: space-between; }
+
+.save-project p {
+  font-family: sans-serif; }
+
+.control {
+  width: 33vw; }
 
 .projects article {
   width: 33vw; }
+
+.controls-div {
+  display: flex;
+  height: 10vh; }
+
+.small-palette {
+  height: 20%;
+  width: 100%; }
+
+.palette-name {
+  display: inline; }
+
+.delete-palette {
+  margin-left: -20px;
+  position: absolute; }
+
+h3 {
+  overflow-y: scroll;
+  height: 3vh; }
+
+.small-palettes-div {
+  height: 15vh;
+  flex-direction: column; }
 
 button {
   margin: 25px; }

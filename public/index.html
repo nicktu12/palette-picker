@@ -11,40 +11,50 @@
     <section class="palette">
       <div class="color-1">
         <p class="color-1-text"></p> 
-        <button class="lock-button">Lock</button>
+        <button class="lock-button">
+          <img src="assets/lock-2.svg" /> 
+        </button>
       </div>
       <div class="color-2">
         <p class="color-2-text"></p> 
-        <button class="lock-button">Lock</button>
+        <button class="lock-button">
+          <img src="assets/lock-2.svg" /> 
+        </button>
       </div>
       <div class="color-3">
         <p class="color-3-text"></p> 
-        <button class="lock-button">Lock</button>
+        <button class="lock-button">
+          <img src="assets/lock-2.svg" /> 
+        </button>
       </div>
       <div class="color-4">
         <p class="color-4-text"></p> 
-        <button class="lock-button">Lock</button>
+        <button class="lock-button">
+          <img src="assets/lock-2.svg" /> 
+        </button>
       </div>
       <div class="color-5">
         <p class="color-5-text"></p> 
-        <button class="lock-button">Lock</button>
+        <button class="lock-button">
+          <img src="assets/lock-2.svg" /> 
+        </button>
       </div>
     </section>
-    <button class="new-colors">Generate New Colors</button>
-    <form class="save-palette">
-      <select class="project-drop-down">
-      </select>
-      <input type="text" placeholder="Palette name" class="save-palette-input" />
-      <input type="submit" value="Save Palette" />
-    </form>
-    <section>
-      <p>Create new project</p>
-      <form class="save-project">
+    <div class="controls-div">
+      <button class="new-colors control">Generate New Colors</button>
+      <form class="save-project control">
+        <p>Create new project</p>
         <input type="text" placeholder="New project name" class="save-project-input" />
         <input type="submit" value="Save project" />
       </form>
-      <div class="projects"></div>
-    </section>
+      <form class="save-palette control">
+        <select class="project-drop-down">
+        </select>
+        <input type="text" placeholder="Palette name" class="save-palette-input" />
+        <input type="submit" value="Save new palette" />
+      </form>
+    </div>
+    <div class="projects"></div>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script type="text/javascript" src="js/scripts.js"></script>
   </body>
