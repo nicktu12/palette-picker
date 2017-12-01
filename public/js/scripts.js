@@ -18,6 +18,7 @@ function assignRandomColors() {
 }
 
 function lockColor() {
+  console.log('heyyyyy:w')
   $(this).parent().toggleClass('lock');
 }
 
