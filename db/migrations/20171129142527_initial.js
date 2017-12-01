@@ -18,7 +18,7 @@ exports.up = function(knex, Promise) {
       table.foreign('projectId').references('projects.id');
       table.timestamps(true, true);
     })
-  ]) // end promise.all  
+  ]); // end promise.all  
 };
 
 exports.down = function(knex, Promise) {

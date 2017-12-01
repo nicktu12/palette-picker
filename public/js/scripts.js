@@ -18,7 +18,6 @@ function assignRandomColors() {
 }
 
 function lockColor() {
-  console.log('heyyyyy:w')
   $(this).parent().toggleClass('lock');
 }
 
@@ -61,7 +60,9 @@ function savePalette(event) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name, color1, color2, color3, color4, color5, projectId })
+    body: JSON.stringify(
+      { name, color1, color2, color3, color4, color5, projectId }
+    )
   })
     .then(response => {
       if (response.status === 201) {
@@ -85,9 +86,10 @@ function fetchProjects() {
         appendProjects(project);
         fetch(`/api/v1/projects/${project.id}/palettes`)
           .then(response=>response.json())
-          .then(palettes=>appendPalettes(palettes, project.id))
+          .then(palettes=>appendPalettes(palettes, project.id));
       });
-    });
+    })
+    .catch(error => console.log({ error }));
 }
 
 function appendProjects(fetchedProject) {
@@ -119,28 +121,27 @@ function appendPalettes(palettesArray, projectId) {
         </div>
       </section>
     `;
-  $(`.append-palette-${projectId}`).append(projectPalettes);
-  })
+    $(`.append-palette-${projectId}`).append(projectPalettes);
+  });
 }
 
 function deletePalette(){
-  console.log($(this).parent().prop('className'))
   const id = $(this).parent().prop('className');
 
   fetch(`/api/v1/palettes/${id}`, {
     method: 'DELETE'
   })
-  .then(()=>$(`.${id}`).remove())
-  .catch(error => console.log({ error }));
+    .then(()=>$(`.${id}`).remove())
+    .catch(error => console.log({ error }));
 }
 
 function displayPalette(){
   const palette = $(event.target).closest('section');
-  const colors = JSON.parse(palette.attr('data-colors'))
+  const colors = JSON.parse(palette.attr('data-colors'));
 
   colors.forEach((color, index)=>{
-    $(`.color-${index + 1}`).css('background-color', color)
-  })
+    $(`.color-${index + 1}`).css('background-color', color);
+  });
 }
 
 $(document).ready(() => {

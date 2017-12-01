@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 const express = require('express'); // express is a library on top of node that is easier that utilizing node alone
 const bodyParser = require('body-parser'); // allows for the body of a post to be readable within the server
 const app = express(); // creates an instance of express  
@@ -46,10 +48,10 @@ app.post('/api/v1/projects', (request, response) => { // defines endpoint to add
 app.post('/api/v1/palettes', (request, response) => { // defines endpoint for adding palettes to palettes table
   const palette = request.body; // set body of request to palette variable
   for (let requiredParameter of ['name', 'color1', 'color2', 'color3', 'color4', 'color5', 'projectId']){ // loop over required parameteeers
-    if(!palette[requiredParameter]){ // if there is a required parameter missing
+    if (!palette[requiredParameter]){ // if there is a required parameter missing
       return response.status(422).send({  // send 422 error indictating syntax of request was correct but unable to process
         error: `Expected format: { name: <String>, color1: <String>, color2: <String>, color3: <String>, color4: <String>, color5: <String>, projectId: <Integer> }. You're missing a "${requiredParameter}" property.`  // send 422 error indictating syntax of request was correct but unable to process
-      })
+      });
     }
   }
 
@@ -60,7 +62,7 @@ app.post('/api/v1/palettes', (request, response) => { // defines endpoint for ad
     .catch(error => {
       response.status(500).json({ error }); // provide generic server error
     });
-})
+});
 
 app.get('/api/v1/projects', (request, response) => { // defines endpoint as a valid get endpoint
   database('projects').select() // goes to database and gets projects table 
@@ -88,15 +90,16 @@ app.delete('/api/v1/palettes/:id', (request, response)=>{ // define endpoint for
   const { id } = request.params;  // destructure id from request object
 
   database('palettes').where({ id }).del() // destroys palette where id in palettes table matches request id
-  .then(palette=>{
-    if(palette){ // verify that a palette exists
-      response.sendStatus(204); // request fufilled and no additional content to send to client 
-    } else {
-      response.status(422).json({ error: `No resource with an id of ${id} was found.` }); // error to indicate syntax of request was correct but unable to process
-    }
-  })
-    .catch(error=>{response.status(500).json({ error }) // provide generic server error
-  });
-})
+    .then(palette=>{
+      if (palette){ // verify that a palette exists
+        response.sendStatus(204); // request fufilled and no additional content to send to client 
+      } else {
+        response.status(422).json({ error: `No resource with an id of ${id} was found.` }); // error to indicate syntax of request was correct but unable to process
+      }
+    })
+    .catch(error=>{ 
+      response.status(500).json({ error }); // provide generic server error
+    });
+});
 
 module.exports = app; // tests wont run without this so export the server for testing!
