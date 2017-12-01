@@ -47,8 +47,32 @@ function saveProject(event) {
 
 function savePalette(event) {
   event.preventDefault();
-  const paletteName = $('.save-palette-input').val();
-  console.log(paletteName)
+  const name = $('.save-palette-input').val();
+  const color1 = $('.color-1-text').text();
+  const color2 = $('.color-2-text').text();
+  const color3 = $('.color-3-text').text();
+  const color4 = $('.color-4-text').text();
+  const color5 = $('.color-5-text').text();
+  const projectId = $('.project-drop-down').val();
+
+  fetch('/api/v1/palettes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, color1, color2, color3, color4, color5, projectId })
+  })
+    .then(response => {
+      if (response.status === 201) {
+        return response.json();
+      }
+    })
+    .then(()=>{
+      $('.save-palette-input').val('');
+      $('.projects').html('');
+      fetchProjects();
+    })
+    .catch(error => console.log({ error }));
 }
 
 function fetchProjects() {
