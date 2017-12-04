@@ -5,7 +5,8 @@ exports.seed = function(knex, Promise) {
     .then(()=>{
       return Promise.all([
         knex('projects').insert({
-          name: 'My First Project'
+          name: 'My First Project',
+          id: 1
         }, 'id') // inserts a single project
           .then(project => {
             return knex('palettes').insert([
@@ -16,7 +17,8 @@ exports.seed = function(knex, Promise) {
                 color3: '#f07272',
                 color4: '#a90091',
                 color5: '#0078c1',
-                projectId: project[0]
+                projectId: 1,
+                id: 1
               },
               {
                 name: 'Cotton Candy',
@@ -25,7 +27,8 @@ exports.seed = function(knex, Promise) {
                 color3: '#7946B2',
                 color4: '#27CCB6',
                 color5: '#874D5E',
-                projectId: project[0]
+                projectId: 1,
+                id: 2
               }
             ]);
           }) // inserts palettes into our mock projects

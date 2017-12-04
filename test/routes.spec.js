@@ -71,6 +71,40 @@ describe('API routes', ()=>{
     });
   });
 
+
+  describe('GET /api/v1/projects/:id/palettes', ()=>{
+    it('should return all palettes from a specific project',()=>{
+      return chai.request(server)
+        .get('/api/v1/projects/1/palettes')
+        .then(response=>{
+          response.should.have.status(200);
+          response.should.be.json;
+          response.body.length.should.equal(2);
+          response.body[0].should.have.property('id');
+          response.body[0].id.should.equal(1);
+          response.body[0].should.have.property('name');
+          response.body[0].name.should.equal('My first palette');
+          response.body[0].should.have.property('color1');
+          response.body[0].color1.should.equal('#dd0d0d');
+          response.body[0].should.have.property('color2');
+          response.body[0].color2.should.equal('#ff00f4');
+          response.body[0].should.have.property('color3');
+          response.body[0].color3.should.equal('#f07272');
+          response.body[0].should.have.property('color4');
+          response.body[0].color4.should.equal('#a90091');
+          response.body[0].should.have.property('color5');
+          response.body[0].color5.should.equal('#0078c1');
+          response.body[0].should.have.property('projectId');
+          response.body[0].projectId.should.equal(1);
+          response.body[0].should.have.property('created_at');
+          response.body[0].should.have.property('updated_at');
+        })
+        .catch(error=>{
+          throw error;
+        });
+    });
+  });
+
   describe('POST /api/v1/projects', ()=>{
     it('should be able to add a project to the database', (done)=>{
       chai.request(server)
