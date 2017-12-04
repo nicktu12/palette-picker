@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 
 exports.seed = function(knex, Promise) {
   return knex('palettes').del() // deletes all projects

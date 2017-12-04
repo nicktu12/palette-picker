@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 
 exports.seed = function(knex, Promise) {
   return knex('palettes').del() // deletes all projects
@@ -8,7 +9,7 @@ exports.seed = function(knex, Promise) {
           name: 'My First Project',
           id: 1
         }, 'id') // inserts a single project
-          .then(project => {
+          .then(() => {
             return knex('palettes').insert([
               {
                 name: 'My first palette',

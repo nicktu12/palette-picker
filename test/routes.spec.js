@@ -73,7 +73,7 @@ describe('API routes', ()=>{
 
 
   describe('GET /api/v1/projects/:id/palettes', ()=>{
-    it('should return all palettes from a specific project',()=>{
+    it('should return all palettes from a specific project', ()=>{
       return chai.request(server)
         .get('/api/v1/projects/1/palettes')
         .then(response=>{
@@ -134,6 +134,69 @@ describe('API routes', ()=>{
         })
         .end((error, response)=>{
           response.should.have.status(422);
+          done();
+        });
+    });
+  });
+
+  describe('POST /api/v1/palettes', ()=>{
+    it('should be able to add a palette to the database', (done)=>{
+      chai.request(server)
+        .post('/api/v1/palettes') 
+        .send({
+          name: 'Palette Town Palette',
+          color1: '#eee000',
+          color2: '#fff000',
+          color3: '#aaabbb',
+          color4: '#eee444',
+          color5: '#fff122',
+          projectId: 1
+        })
+        .end((error, response) => {
+          response.should.have.status(201);
+          response.body.should.be.a('object');
+          response.body.should.have.a.property('id');
+          chai.request(server)
+            .get('/api/v1/projects/1/palettes')
+            .end((error, response)=>{
+              response.body.should.be.a('array');
+              response.body.length.should.equal(3);
+              done();
+            });
+        });
+    });
+
+    it('should not create a paleette if missing a required property', (done)=>{
+      chai.request(server)
+        .post('/api/v1/palettes')
+        .send({
+          id: 2
+        })
+        .end((error, response)=>{
+          response.should.have.status(422);
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /api/v1/palettes', ()=>{
+    it('should be able to destroy a palette in the database', (done)=>{
+      chai.request(server)
+        .delete('/api/v1/palettes/1')
+        .end((error, response) => {
+          response.should.have.status(204);
+          done();
+        });
+    });
+
+    it('should return 422 if palette is not found in database', (done)=>{
+      chai.request(server)
+        .delete('/api/v1/palettes/1212')
+        .end((error, response)=>{
+          response.should.have.status(422);
+          response.body.error.should.equal(
+            'No resource with an id of 1212 was found.'
+          );
           done();
         });
     });

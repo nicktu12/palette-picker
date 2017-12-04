@@ -1,4 +1,5 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len, no-console */
+
 
 const express = require('express'); 
 const bodyParser = require('body-parser'); 
