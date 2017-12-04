@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -42,7 +44,7 @@ function saveProject(event) {
       $('.project-drop-down').html('');
       fetchProjects();
     })
-    .catch(error => console.log({ error }));
+    .catch(error => alert({ error }));
 }
 
 function savePalette(event) {
@@ -75,7 +77,7 @@ function savePalette(event) {
       $('.projects').html('');
       fetchProjects();
     })
-    .catch(error => console.log({ error }));
+    .catch(error => alert({ error }));
 }
 
 function fetchProjects() {
@@ -89,7 +91,7 @@ function fetchProjects() {
           .then(palettes=>appendPalettes(palettes, project.id));
       });
     })
-    .catch(error => console.log({ error }));
+    .catch(error => alert({ error }));
 }
 
 function appendProjects(fetchedProject) {
@@ -132,7 +134,7 @@ function deletePalette(){
     method: 'DELETE'
   })
     .then(()=>$(`.${id}`).remove())
-    .catch(error => console.log({ error }));
+    .catch(error => alert({ error }));
 }
 
 function displayPalette(){
