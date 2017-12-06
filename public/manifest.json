@@ -6,22 +6,22 @@
   "display": "fullscreen",
   "icons": [
      {
-       "src": "assets/48bear.jpg",
+       "src": "assets/48bear.jpeg",
        "type": "image/jpeg",
        "sizes": "48x48"
      },
      {
-       "src": "assets/96bear.jpg",
+       "src": "assets/96bear.jpeg",
        "type": "image/jpeg",
        "sizes": "96x96"
      },
      {
-       "src": "assets/192bear.jpg",
+       "src": "assets/192bear.jpeg",
        "type": "image/jpeg",
        "sizes": "192x192"
      },
      {
-       "src": "assets/512bear.jpg",
+       "src": "assets/512bear.jpeg",
        "type": "image/jpeg",
        "sizes": "512x512"
      }
