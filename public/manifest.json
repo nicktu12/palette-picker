@@ -1,0 +1,30 @@
+{
+  "short_name": "palette picker",
+  "name": "super rad color palette generator",
+  "background_color": "#dcaffd",
+  "theme_color": "#74c7fd",
+  "display": "fullscreen",
+  "icons": [
+     {
+       "src": "assets/48bear.jpg",
+       "type": "image/jpg",
+       "sizes": "48x48"
+     },
+     {
+       "src": "assets/96bear.jpg",
+       "type": "image/jpg",
+       "sizes": "96x96"
+     },
+     {
+       "src": "assets/192bear.jpg",
+       "type": "image/jpg",
+       "sizes": "192x192"
+     },
+     {
+       "src": "assets/512bear.jpg",
+       "type": "image/jpg",
+       "sizes": "512x512"
+     }
+  ],
+  "start_url": "index.html?launcher=true"
+}
