@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */ 
+
 this.addEventListener('install', event => {
   event.waitUntil(
     caches.open('assets-v1').then(cache => {
@@ -30,5 +32,6 @@ this.addEventListener('activate', event => {
         }
       }));
     })
+      .then(() => clients.claim())
   );
 });
