@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len, no-unused-vars, no-console */
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -143,6 +143,18 @@ function displayPalette(){
 
   colors.forEach((color, index)=>{
     $(`.color-${index + 1}`).css('background-color', color);
+  });
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('../service-worker.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful!');
+      })
+      .catch(error => {
+        console.log(`ServiceWorker registration failed: ${error}`);
+      });
   });
 }
 
