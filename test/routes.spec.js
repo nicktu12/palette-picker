@@ -106,7 +106,7 @@ describe('API routes', ()=>{
   });
 
   describe('POST /api/v1/projects', ()=>{
-    it.skip('should be able to add a project to the database', (done)=>{
+    it('should be able to add a project to the database', (done)=>{
       chai.request(server)
         .post('/api/v1/projects')
         .send({
@@ -140,7 +140,7 @@ describe('API routes', ()=>{
   });
 
   describe('POST /api/v1/palettes', ()=>{
-    it.skip('should be able to add a palette to the database', (done)=>{
+    it('should be able to add a palette to the database', (done)=>{
       chai.request(server)
         .post('/api/v1/palettes') 
         .send({
