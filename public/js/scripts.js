@@ -1,4 +1,36 @@
-/* eslint-disable max-len, no-unused-vars, no-console */
+/* eslint-disable max-len, no-unused-vars, no-console, no-undef */
+
+// IndexedDB
+
+let db = new Dexie('palettePicker');
+
+db.version(1).stores({
+  projects: 'id, name',
+  palettes: 'id, name, color1, color2, color3, color4, color5, projectId',
+});
+
+function saveProjectToIndexedDB(name) {
+  return db.projects.add({id: Date.now(), name});
+}
+
+function savePaletteToIndexedDB({ 
+  name, color1, color2, color3, color4, color5, projectId,
+}) {
+  return db.palettes.add({
+    id: Date.now(),
+    name, color1, color2, color3, color4, color5, projectId,
+  });
+}
+
+function loadOfflinePalettes() {
+  return db.palettes.toArray();
+}
+
+function loadOfflineProjects() {
+  return db.projects.toArray();
+}
+
+// UI Functionality
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -26,6 +58,9 @@ function lockColor() {
 function saveProject(event) {
   event.preventDefault();
   const projectName = $('.save-project-input').val();
+  saveProjectToIndexedDB(projectName)
+    .then(project => appendProjects(project))
+    .catch(error => console.log(error));
   fetch('/api/v1/projects', {
     method: 'POST',
     headers: {
@@ -56,7 +91,9 @@ function savePalette(event) {
   const color4 = $('.color-4-text').text();
   const color5 = $('.color-5-text').text();
   const projectId = $('.project-drop-down').val();
-
+  savePaletteToIndexedDB({
+    name, color1, color2, color3, color4, color5, projectId,
+  });
   fetch('/api/v1/palettes', {
     method: 'POST',
     headers: {
@@ -91,7 +128,9 @@ function fetchProjects() {
           .then(palettes=>appendPalettes(palettes, project.id));
       });
     })
-    .catch(error => alert({ error }));
+    .catch(error => {
+      console.log(loadOfflineProjects());
+    });
 }
 
 function appendProjects(fetchedProject) {
@@ -146,6 +185,8 @@ function displayPalette(){
   });
 }
 
+// Service Worker registration
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('../service-worker.js')
@@ -157,6 +198,8 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+
+// Page load and event listeners
 
 $(document).ready(() => {
   assignRandomColors();
