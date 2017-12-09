@@ -2,7 +2,7 @@
 
 this.addEventListener('install', event => {
   event.waitUntil(
-    caches.open('assets-v1').then(cache => {
+    caches.open('assets-v2').then(cache => {
       return cache.addAll([
         '/',
         '/js/scripts.js',
@@ -22,7 +22,7 @@ this.addEventListener('fetch', event => {
 });
 
 this.addEventListener('activate', event => {
-  let cacheWhitelist = ['assets-v1'];
+  let cacheWhitelist = ['assets-v2'];
 
   event.waitUntil(
     caches.keys().then(keyList => {
