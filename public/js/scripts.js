@@ -130,7 +130,7 @@ function fetchProjects() {
     })
     .catch(error => {
       loadOfflineProjects()
-        .then(projects => console.log(projects))
+        .then(projects => projects.forEach(project => appendProjects(project)))
         .catch(error => { throw error; });
     });
 }
