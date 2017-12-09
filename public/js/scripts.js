@@ -134,10 +134,8 @@ function fetchProjects() {
           appendProjects(project);
           loadOfflinePalettes()
             .then(palettes => {
-              console.log(palettes);
-              console.log(project);
+              console.log(palettes, project);
               const matchingPalettes = palettes.filter(palette => palette.projectId === project.id);
-              console.log(matchingPalettes);
               appendPalettes(matchingPalettes, project.id);
             })
             .catch(error => { throw error; });
