@@ -130,7 +130,15 @@ function fetchProjects() {
     })
     .catch(error => {
       loadOfflineProjects()
-        .then(projects => projects.forEach(project => appendProjects(project)))
+        .then(projects => projects.forEach(project => {
+          appendProjects(project);
+          loadOfflinePalettes()
+            .then(palettes => {
+              const matchingPalettes = palettes.filter(palette => palette.projectId === project.id);
+              appendPalettes(matchingPalettes, project.id);
+            })
+            .catch(error => { throw error; });
+        }))
         .catch(error => { throw error; });
     });
 }
