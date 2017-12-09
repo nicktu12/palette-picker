@@ -129,7 +129,9 @@ function fetchProjects() {
       });
     })
     .catch(error => {
-      console.log(loadOfflineProjects());
+      loadOfflineProjects()
+        .then(projects => console.log(projects))
+        .catch(error => { throw error; });
     });
 }
 
