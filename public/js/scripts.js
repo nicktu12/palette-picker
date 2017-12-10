@@ -6,7 +6,7 @@ let db = new Dexie('palettePicker');
 
 db.version(1).stores({
   projects: 'id, name',
-  palettes: 'id, name, color1, color2, color3, color4, color5, projectName',
+  palettes: 'id, name, color1, color2, color3, color4, color5, projectId',
 });
 
 function saveProjectToIndexedDB(name) {
@@ -14,11 +14,11 @@ function saveProjectToIndexedDB(name) {
 }
 
 function savePaletteToIndexedDB({ 
-  name, color1, color2, color3, color4, color5, projectName,
+  name, color1, color2, color3, color4, color5, projectId,
 }) {
   return db.palettes.add({
     id: Date.now(),
-    name, color1, color2, color3, color4, color5, projectName,
+    name, color1, color2, color3, color4, color5, projectId,
   });
 }
 
@@ -91,9 +91,8 @@ function savePalette(event) {
   const color4 = $('.color-4-text').text();
   const color5 = $('.color-5-text').text();
   const projectId = $('.project-drop-down').val();
-  const projectName = $('.project-drop-down').text();
   savePaletteToIndexedDB({
-    name, color1, color2, color3, color4, color5, projectName,
+    name, color1, color2, color3, color4, color5, projectId,
   });
   fetch('/api/v1/palettes', {
     method: 'POST',
@@ -135,9 +134,9 @@ function fetchProjects() {
           appendProjects(project);
           loadOfflinePalettes()
             .then(palettes => {
-              console.log(palettes, project);
-              const matchingPalettes = palettes.filter(palette => palette.projectName === project.name);
-              appendPalettes(matchingPalettes, project.name);
+              console.log(palettes);
+              const matchingPalettes = palettes.filter(palette => palette.projectId === project.id);
+              appendPalettes(matchingPalettes, project.id);
             })
             .catch(error => { throw error; });
         }))
