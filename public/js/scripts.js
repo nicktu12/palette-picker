@@ -91,8 +91,9 @@ function savePalette(event) {
   const color4 = $('.color-4-text').text();
   const color5 = $('.color-5-text').text();
   const projectId = $('.project-drop-down').val();
+  const projectName = $('.project-drop-down').text();
   savePaletteToIndexedDB({
-    name, color1, color2, color3, color4, color5, projectName: name,
+    name, color1, color2, color3, color4, color5, projectName,
   });
   fetch('/api/v1/palettes', {
     method: 'POST',
@@ -136,7 +137,7 @@ function fetchProjects() {
             .then(palettes => {
               console.log(palettes, project);
               const matchingPalettes = palettes.filter(palette => palette.projectName === project.name);
-              appendPalettes(matchingPalettes, project.id);
+              appendPalettes(matchingPalettes, project.name);
             })
             .catch(error => { throw error; });
         }))
