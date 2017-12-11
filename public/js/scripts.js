@@ -77,7 +77,7 @@ function saveProject(event) {
       $('.project-drop-down').html('');
       fetchProjects();
     })
-    .catch(error => alert({ error }));
+    .catch(error => { throw error; });
   const id = Date.now();
   saveProjectToIndexedDB(id, projectName)
     .then(project => {
@@ -118,7 +118,7 @@ function savePalette(event) {
       $('.projects').html('');
       fetchProjects();
     })
-    .catch(error => alert({ error }));
+    .catch(error => { throw error; });
   addOfflinePalette(name, colorArray);
 }
 
@@ -231,7 +231,7 @@ function deletePalette(){
     method: 'DELETE'
   })
     .then(()=>$(`.${id}`).remove())
-    .catch(error => alert({ error }));
+    .catch(error => { throw error; });
 }
 
 function displayPalette(){
