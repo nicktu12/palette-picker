@@ -144,7 +144,7 @@ function buildOfflinePalette(projectId, name, colorArray) {
   savePaletteToIndexedDB(builtPalette)
     .then(palette => {
       if (!navigator.onLine) {
-        appendPalettes([palette], projectId);
+        appendPalettes([builtPalette], projectId);
       }
     })
     .catch(error => { throw error; });
