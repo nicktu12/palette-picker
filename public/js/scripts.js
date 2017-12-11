@@ -9,8 +9,8 @@ db.version(1).stores({
   palettes: 'id, name, color1, color2, color3, color4, color5, projectId',
 });
 
-function saveProjectToIndexedDB(name) {
-  return db.projects.add({id: Date.now(), name});
+function saveProjectToIndexedDB(id, projectName) {
+  return db.projects.add({id, name: projectName});
 }
 
 function savePaletteToIndexedDB({ 
@@ -22,13 +22,14 @@ function savePaletteToIndexedDB({
   });
 }
 
-function loadOfflinePalettes() {
-  return db.palettes.toArray();
-}
-
 function loadOfflineProjects() {
   return db.projects.toArray();
 }
+
+function loadOfflinePalettes(id) {
+  return db.palettes.where('projectId').equals(id).toArray();
+}
+
 
 // UI Functionality
 
@@ -58,9 +59,6 @@ function lockColor() {
 function saveProject(event) {
   event.preventDefault();
   const projectName = $('.save-project-input').val();
-  saveProjectToIndexedDB(projectName)
-    .then(project => appendProjects(project))
-    .catch(error => console.log(error));
   fetch('/api/v1/projects', {
     method: 'POST',
     headers: {
@@ -80,6 +78,14 @@ function saveProject(event) {
       fetchProjects();
     })
     .catch(error => alert({ error }));
+  const id = Date.now();
+  saveProjectToIndexedDB(id, projectName)
+    .then(project => {
+      if (!navigator.onLine) {
+        appendOfflineProject(project, projectName);
+      }
+    })
+    .catch(error => { throw error; });
 }
 
 function savePalette(event) {
@@ -90,10 +96,8 @@ function savePalette(event) {
   const color3 = $('.color-3-text').text();
   const color4 = $('.color-4-text').text();
   const color5 = $('.color-5-text').text();
+  const colorArray = [color1, color2, color3, color4, color5];
   const projectId = $('.project-drop-down').val();
-  savePaletteToIndexedDB({
-    name, color1, color2, color3, color4, color5, projectId,
-  });
   fetch('/api/v1/palettes', {
     method: 'POST',
     headers: {
@@ -115,6 +119,35 @@ function savePalette(event) {
       fetchProjects();
     })
     .catch(error => alert({ error }));
+  addOfflinePalette(name, colorArray);
+}
+
+function addOfflinePalette(name, colorArray) {
+  loadOfflineProjects()
+    .then(projects => projects.find(project => project.name === $('.project-drop-down option:selected').text()))
+    .then(project => buildOfflinePalette(project.id, name, colorArray))
+    .catch(error => { throw error; });
+}
+
+function buildOfflinePalette(projectId, name, colorArray) {
+  const id = Date.now();
+  const builtPalette = {
+    id,
+    name,
+    color1: colorArray[0],
+    color2: colorArray[1],
+    color3: colorArray[2],
+    color4: colorArray[3],
+    color5: colorArray[4],
+    projectId
+  };
+  savePaletteToIndexedDB(builtPalette)
+    .then(palette => {
+      if (!navigator.onLine) {
+        appendPalettes([palette], projectId);
+      }
+    })
+    .catch(error => { throw error; });
 }
 
 function fetchProjects() {
@@ -122,35 +155,49 @@ function fetchProjects() {
     .then(response=> response.json())
     .then(projects=>{
       projects.forEach(project=>{
-        appendProjects(project);
+        appendProject(project);
         fetch(`/api/v1/projects/${project.id}/palettes`)
           .then(response=>response.json())
-          .then(palettes=>appendPalettes(palettes, project.id));
+          .then(palettes=>appendPalettes(palettes, project.id))
+          .catch(error => { throw error; });
       });
     })
     .catch(error => {
       loadOfflineProjects()
-        .then(projects => projects.forEach(project => {
-          appendProjects(project);
-          loadOfflinePalettes()
-            .then(palettes => {
-              console.log(palettes);
-              const matchingPalettes = palettes.filter(palette => palette.projectId === project.id);
-              appendPalettes(matchingPalettes, project.id);
-            })
-            .catch(error => { throw error; });
-        }))
+        .then(projects => {
+          projects.forEach(project => {
+            appendOfflineProject(project.id, project.name);
+            loadOfflinePalettes(project.id)
+              .then(palettes => {
+                appendPalettes(palettes, project.id);
+              })
+              .catch(error => { throw error; });
+          });
+        })
         .catch(error => { throw error; });
     });
 }
 
-function appendProjects(fetchedProject) {
+function appendProject(fetchedProject) {
   const projectName =
     `<option value=${fetchedProject.id}>${fetchedProject.name}</option>`;
   const project = `
     <article>
       <h3>${fetchedProject.name}</h3>
       <div class="append-palette-${fetchedProject.id}"></div>
+    </article>
+  `;
+  $('.projects').append(project);
+  $('.project-drop-down').append(projectName);
+}
+
+function appendOfflineProject(id, name) {
+  const projectName =
+    `<option value=${id}>${name}</option>`;
+  const project = `
+    <article>
+      <h3>${name}</h3>
+      <div class="append-palette-${id}"></div>
     </article>
   `;
   $('.projects').append(project);
