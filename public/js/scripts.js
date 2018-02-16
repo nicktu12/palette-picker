@@ -316,16 +316,23 @@ var translateAll = function() {
     var rotate = $(this)
       .data("rotate")
       .toString();
-    var transform = "rotate(" + rotate + "deg) translateY(" + translate + "px)";
+    var transform = "rotate(" + rotate + "deg) translateY(425px)";
 
     $(this).css({
       transform: transform
     });
+    var transform = "rotate(" + rotate + "deg) translateY(175px)";
+
+    setTimeout(() => {
+      $(this).css({
+        transform: transform
+      });
+    }, 500);
   });
 };
 $(function() {
   translateAll();
-  $('input[type="range"]').on("input", function() {
+  $(".aperture").on("click", function() {
     var translateVal = $(this).val();
     $(".container div").each(function() {
       $(this).data("translate", translateVal);
