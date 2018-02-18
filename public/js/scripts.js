@@ -45,6 +45,20 @@ function loadOfflinePalettes(id) {
     .toArray();
 }
 
+// Aperture effect
+
+const apertureEffect = () => {
+  $(".camera-shutter--animation1").toggleClass(
+    "camera-shutter--open camera-shutter--f32"
+  );
+};
+
+$(".camera-shutter--animation1").click(function() {
+  apertureEffect();
+  setTimeout(assignRandomColors, 500);
+  setTimeout(apertureEffect, 500);
+});
+
 // UI Functionality
 
 function getRandomColor() {
@@ -57,7 +71,7 @@ function getRandomColor() {
 }
 
 function assignRandomColors() {
-  for (let i = 1; i < 6; i++) {
+  for (let i = 1; i <= 6; i++) {
     if (!$(`.color-${i}`).hasClass("lock")) {
       let color = getRandomColor();
       $(`.color-${i}-text`).text(color);
