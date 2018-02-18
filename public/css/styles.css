@@ -395,89 +395,12 @@ h1 {
 }
 
 /* === Themes */
-/* theme 1 */
-.camera-shutter--theme1 .camera-shutter__triangle {
-  background: #fff;
-  border: 0 none;
-  padding: 3px;
-  outline: 1px solid #fff;
-}
-.camera-shutter--theme1 .camera-shutter__triangle:after {
-  background: #000;
-  content: "";
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-/* theme 2 */
-.camera-shutter--theme2 .camera-shutter__triangle {
-  background: transparent;
-  border: 0 none;
-  padding: 0;
-}
-.camera-shutter--theme2 .camera-shutter__triangle:after {
-  background: #000;
-  content: "";
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-.camera-shutter--theme2 .camera-shutter__lens,
-.camera-shutter--theme2 .camera-shutter__triangle {
-  transition: all 1s ease-out;
-}
-.camera-shutter--theme2.camera-shutter--open .camera-shutter__triangle {
-  padding: 4px;
-}
-
 /* theme 3 */
 .camera-shutter--theme3 {
   border: 0 none;
 }
 .camera-shutter--theme3 .camera-shutter__triangle {
   border: 0 none;
-}
-.camera-shutter--theme3 .camera-shutter__triangle--1 {
-  background: #f00;
-}
-.camera-shutter--theme3 .camera-shutter__triangle--2 {
-  background: #f90;
-}
-.camera-shutter--theme3 .camera-shutter__triangle--3 {
-  background: #ff0;
-}
-.camera-shutter--theme3 .camera-shutter__triangle--4 {
-  background: #0f0;
-}
-.camera-shutter--theme3 .camera-shutter__triangle--5 {
-  background: #00f;
-}
-.camera-shutter--theme3 .camera-shutter__triangle--6 {
-  background: #f0f;
-}
-
-/* theme 4 */
-.camera-shutter--theme4 .camera-shutter__triangle {
-  border: 2px solid #000;
-}
-.camera-shutter--theme4 .camera-shutter__triangle--1 {
-  background: #f00;
-}
-.camera-shutter--theme4 .camera-shutter__triangle--2 {
-  background: #f90;
-}
-.camera-shutter--theme4 .camera-shutter__triangle--3 {
-  background: #ff0;
-}
-.camera-shutter--theme4 .camera-shutter__triangle--4 {
-  background: #0f0;
-}
-.camera-shutter--theme4 .camera-shutter__triangle--5 {
-  background: #00f;
-}
-.camera-shutter--theme4 .camera-shutter__triangle--6 {
-  background: #f0f;
 }
 
 /* === Speed */
