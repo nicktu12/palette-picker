@@ -2,23 +2,35 @@
 
 // IndexedDB
 
-let db = new Dexie('palettePicker');
+let db = new Dexie("palettePicker");
 
 db.version(1).stores({
-  projects: 'id, name',
-  palettes: 'id, name, color1, color2, color3, color4, color5, projectId',
+  projects: "id, name",
+  palettes: "id, name, color1, color2, color3, color4, color5, projectId"
 });
 
 function saveProjectToIndexedDB(id, projectName) {
-  return db.projects.add({id, name: projectName});
+  return db.projects.add({ id, name: projectName });
 }
 
-function savePaletteToIndexedDB({ 
-  name, color1, color2, color3, color4, color5, projectId,
+function savePaletteToIndexedDB({
+  name,
+  color1,
+  color2,
+  color3,
+  color4,
+  color5,
+  projectId
 }) {
   return db.palettes.add({
     id: Date.now(),
-    name, color1, color2, color3, color4, color5, projectId,
+    name,
+    color1,
+    color2,
+    color3,
+    color4,
+    color5,
+    projectId
   });
 }
 
@@ -27,15 +39,17 @@ function loadOfflineProjects() {
 }
 
 function loadOfflinePalettes(id) {
-  return db.palettes.where('projectId').equals(id).toArray();
+  return db.palettes
+    .where("projectId")
+    .equals(id)
+    .toArray();
 }
-
 
 // UI Functionality
 
 function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
+  var letters = "0123456789ABCDEF";
+  var color = "#";
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
@@ -44,25 +58,27 @@ function getRandomColor() {
 
 function assignRandomColors() {
   for (let i = 1; i < 6; i++) {
-    if (!$(`.color-${i}`).hasClass('lock')){
+    if (!$(`.color-${i}`).hasClass("lock")) {
       let color = getRandomColor();
       $(`.color-${i}-text`).text(color);
-      $(`.color-${i}`).css('background-color', color);
+      $(`.color-${i}`).css("background-color", color);
     }
   }
 }
 
 function lockColor() {
-  $(this).parent().toggleClass('lock');
+  $(this)
+    .parent()
+    .toggleClass("lock");
 }
 
 function saveProject(event) {
   event.preventDefault();
-  const projectName = $('.save-project-input').val();
-  fetch('/api/v1/projects', {
-    method: 'POST',
+  const projectName = $(".save-project-input").val();
+  fetch("/api/v1/projects", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({ name: projectName })
   })
@@ -71,13 +87,15 @@ function saveProject(event) {
         return response.json();
       }
     })
-    .then(()=>{
-      $('.save-project-input').val('');
-      $('.projects').html('');
-      $('.project-drop-down').html('');
+    .then(() => {
+      $(".save-project-input").val("");
+      $(".projects").html("");
+      $(".project-drop-down").html("");
       fetchProjects();
     })
-    .catch(error => { throw error; });
+    .catch(error => {
+      throw error;
+    });
   const id = Date.now();
   saveProjectToIndexedDB(id, projectName)
     .then(project => {
@@ -85,48 +103,65 @@ function saveProject(event) {
         appendOfflineProject(project, projectName);
       }
     })
-    .catch(error => { throw error; });
+    .catch(error => {
+      throw error;
+    });
 }
 
 function savePalette(event) {
   event.preventDefault();
-  const name = $('.save-palette-input').val();
-  const color1 = $('.color-1-text').text();
-  const color2 = $('.color-2-text').text();
-  const color3 = $('.color-3-text').text();
-  const color4 = $('.color-4-text').text();
-  const color5 = $('.color-5-text').text();
+  const name = $(".save-palette-input").val();
+  const color1 = $(".color-1-text").text();
+  const color2 = $(".color-2-text").text();
+  const color3 = $(".color-3-text").text();
+  const color4 = $(".color-4-text").text();
+  const color5 = $(".color-5-text").text();
   const colorArray = [color1, color2, color3, color4, color5];
-  const projectId = $('.project-drop-down').val();
-  fetch('/api/v1/palettes', {
-    method: 'POST',
+  const projectId = $(".project-drop-down").val();
+  fetch("/api/v1/palettes", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(
-      { name, color1, color2, color3, color4, color5, projectId }
-    )
+    body: JSON.stringify({
+      name,
+      color1,
+      color2,
+      color3,
+      color4,
+      color5,
+      projectId
+    })
   })
     .then(response => {
       if (response.status === 201) {
         return response.json();
       }
     })
-    .then(()=>{
-      $('.save-palette-input').val('');
-      $('.project-drop-down').html('');
-      $('.projects').html('');
+    .then(() => {
+      $(".save-palette-input").val("");
+      $(".project-drop-down").html("");
+      $(".projects").html("");
       fetchProjects();
     })
-    .catch(error => { throw error; });
+    .catch(error => {
+      throw error;
+    });
   addOfflinePalette(name, colorArray);
 }
 
 function addOfflinePalette(name, colorArray) {
   loadOfflineProjects()
-    .then(projects => projects.find(project => project.name === $('.project-drop-down option:selected').text()))
+    .then(projects =>
+      projects.find(
+        project =>
+          project.name === $(".project-drop-down option:selected").text()
+      )
+    )
     .then(project => buildOfflinePalette(project.id, name, colorArray))
-    .catch(error => { throw error; });
+    .catch(error => {
+      throw error;
+    });
 }
 
 function buildOfflinePalette(projectId, name, colorArray) {
@@ -147,19 +182,23 @@ function buildOfflinePalette(projectId, name, colorArray) {
         appendPalettes([builtPalette], projectId);
       }
     })
-    .catch(error => { throw error; });
+    .catch(error => {
+      throw error;
+    });
 }
 
 function fetchProjects() {
-  fetch('/api/v1/projects')
-    .then(response=> response.json())
-    .then(projects=>{
-      projects.forEach(project=>{
+  fetch("/api/v1/projects")
+    .then(response => response.json())
+    .then(projects => {
+      projects.forEach(project => {
         appendProject(project);
         fetch(`/api/v1/projects/${project.id}/palettes`)
-          .then(response=>response.json())
-          .then(palettes=>appendPalettes(palettes, project.id))
-          .catch(error => { throw error; });
+          .then(response => response.json())
+          .then(palettes => appendPalettes(palettes, project.id))
+          .catch(error => {
+            throw error;
+          });
       });
     })
     .catch(error => {
@@ -171,52 +210,72 @@ function fetchProjects() {
               .then(palettes => {
                 appendPalettes(palettes, project.id);
               })
-              .catch(error => { throw error; });
+              .catch(error => {
+                throw error;
+              });
           });
         })
-        .catch(error => { throw error; });
+        .catch(error => {
+          throw error;
+        });
     });
 }
 
 function appendProject(fetchedProject) {
-  const projectName =
-    `<option value=${fetchedProject.id}>${fetchedProject.name}</option>`;
+  const projectName = `<option value=${fetchedProject.id}>${
+    fetchedProject.name
+  }</option>`;
   const project = `
     <article>
       <h3>${fetchedProject.name}</h3>
       <div class="append-palette-${fetchedProject.id}"></div>
     </article>
   `;
-  $('.projects').append(project);
-  $('.project-drop-down').append(projectName);
+  $(".projects").append(project);
+  $(".project-drop-down").append(projectName);
 }
 
 function appendOfflineProject(id, name) {
-  const projectName =
-    `<option value=${id}>${name}</option>`;
+  const projectName = `<option value=${id}>${name}</option>`;
   const project = `
     <article>
       <h3>${name}</h3>
       <div class="append-palette-${id}"></div>
     </article>
   `;
-  $('.projects').append(project);
-  $('.project-drop-down').append(projectName);
+  $(".projects").append(project);
+  $(".project-drop-down").append(projectName);
 }
 
 function appendPalettes(palettesArray, projectId) {
-  palettesArray.forEach(palette=>{
+  palettesArray.forEach(palette => {
     const paletteName = palette.name;
     const projectPalettes = `
-      <section class='${palette.id}' data-colors='${JSON.stringify([palette.color1, palette.color2, palette.color3, palette.color4, palette.color5])}'>
+      <section class='${palette.id}' data-colors='${JSON.stringify([
+      palette.color1,
+      palette.color2,
+      palette.color3,
+      palette.color4,
+      palette.color5
+    ])}'>
         <p class="palette-name">${paletteName}</p>
         <button class="delete-palette">Delete</button>
         <div class="small-palettes-div">
-        <div style='background-color: ${palette.color1}' class='palette-color-1 small-palette'></div>
-        <div style='background-color: ${palette.color2}' class='palette-color-2 small-palette'></div>
-        <div style='background-color: ${palette.color3}' class='palette-color-3 small-palette'></div>
-        <div style='background-color: ${palette.color4}' class='palette-color-4 small-palette'></div>
-        <div style='background-color: ${palette.color5}' class='palette-color-5 small-palette'></div>
+        <div style='background-color: ${
+          palette.color1
+        }' class='palette-color-1 small-palette'></div>
+        <div style='background-color: ${
+          palette.color2
+        }' class='palette-color-2 small-palette'></div>
+        <div style='background-color: ${
+          palette.color3
+        }' class='palette-color-3 small-palette'></div>
+        <div style='background-color: ${
+          palette.color4
+        }' class='palette-color-4 small-palette'></div>
+        <div style='background-color: ${
+          palette.color5
+        }' class='palette-color-5 small-palette'></div>
         </div>
       </section>
     `;
@@ -224,39 +283,43 @@ function appendPalettes(palettesArray, projectId) {
   });
 }
 
-function deletePalette(){
-  const id = $(this).parent().prop('className');
+function deletePalette() {
+  const id = $(this)
+    .parent()
+    .prop("className");
 
   fetch(`/api/v1/palettes/${id}`, {
-    method: 'DELETE'
+    method: "DELETE"
   })
-    .then(()=>$(`.${id}`).remove())
-    .catch(error => { throw error; });
+    .then(() => $(`.${id}`).remove())
+    .catch(error => {
+      throw error;
+    });
 }
 
-function displayPalette(){
-  const palette = $(event.target).closest('section');
-  const colors = JSON.parse(palette.attr('data-colors'));
+function displayPalette() {
+  const palette = $(event.target).closest("section");
+  const colors = JSON.parse(palette.attr("data-colors"));
 
-  colors.forEach((color, index)=>{
-    $(`.color-${index + 1}`).css('background-color', color);
+  colors.forEach((color, index) => {
+    $(`.color-${index + 1}`).css("background-color", color);
   });
 }
 
 // Service Worker registration
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('../service-worker.js')
-      .then(registration => navigator.serviceWorker.ready)
-      .then(registration => {
-        Notification.requestPermission();
-        console.log('ServiceWorker registration successful');
-      }).catch(error => {
-        console.log(`ServiceWorker registration failed: ${error}`);
-      });
-  });
-}
+//if ('serviceWorker' in navigator) {
+//  window.addEventListener('load', () => {
+//    navigator.serviceWorker.register('../service-worker.js')
+//      .then(registration => navigator.serviceWorker.ready)
+//      .then(registration => {
+//        Notification.requestPermission();
+//        console.log('ServiceWorker registration successful');
+//      }).catch(error => {
+//        console.log(`ServiceWorker registration failed: ${error}`);
+//      });
+//  });
+//}
 
 // Page load and event listeners
 
@@ -265,9 +328,9 @@ $(document).ready(() => {
   fetchProjects();
 });
 
-$('.new-colors').on('click', assignRandomColors);
-$('.lock-button').on('click', lockColor);
-$('.save-project').on('submit', saveProject);
-$('.save-palette').on('submit', savePalette);
-$('.projects').on('click', 'button', deletePalette);
-$('.projects').on('click', 'section', displayPalette);
+$(".new-colors").on("click", assignRandomColors);
+$(".lock-button").on("click", lockColor);
+$(".save-project").on("submit", saveProject);
+$(".save-palette").on("submit", savePalette);
+$(".projects").on("click", "button", deletePalette);
+$(".projects").on("click", "section", displayPalette);
