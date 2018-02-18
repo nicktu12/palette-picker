@@ -14,11 +14,46 @@ h1 {
   padding-left: 10px;
 }
 
+.controls-div {
+  display: none;
+}
+
+.projects {
+  display: none;
+}
+
+.lock-button img {
+  display: none;
+  transition: all 0.5s;
+}
+
+.palette {
+  display: flex;
+}
+
+.palette-squares {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.palette-squares div {
+  height: 80px;
+  width: 80px;
+  position: relative;
+}
+
+.palette-squares div p {
+  width: 80px;
+  position: absolute;
+  bottom: 0px;
+}
+
 .example {
   display: inline-block;
   margin: 20px;
-  height: 300px;
-  width: 300px;
+  height: 500px;
+  width: 500px;
 }
 
 .example .camera-shutter {
@@ -446,14 +481,6 @@ h1 {
 
 .camera-shutter--speed1 {
   transition: transform 10s ease-out;
-}
-
-.controls-div {
-  display: none;
-}
-
-.projects {
-  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */
