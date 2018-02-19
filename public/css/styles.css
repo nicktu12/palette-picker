@@ -14,8 +14,16 @@ h1 {
   padding-left: 10px;
 }
 
+body {
+  background-image: url("../assets/camera.svg");
+  background-repeat: no-repeat;
+  background-size: 800px;
+  background-position-y: -50px;
+}
+
 .palette {
   display: flex;
+  justify-content: space-around;
 }
 
 .palette-squares {
@@ -62,6 +70,16 @@ h1 {
   width: 50%;
 }
 
+.small-palette {
+  height: 20%;
+  width: 100%;
+}
+
+.small-palettes-div {
+  height: 15vh;
+  flex-direction: column;
+}
+
 .example {
   display: inline-block;
   margin: 20px;
@@ -70,7 +88,7 @@ h1 {
 }
 
 .example .camera-shutter {
-  background: url(pic.jpg) no-repeat;
+  background-color: black;
 }
 
 .camera-shutter {
