@@ -244,6 +244,7 @@ function appendProject(fetchedProject) {
     </article>
   `;
   $(".projects").append(project);
+  $(".small-palettes").hide();
   $(".project-drop-down").append(projectName);
 }
 
@@ -263,7 +264,9 @@ function appendPalettes(palettesArray, projectId) {
   palettesArray.forEach(palette => {
     const paletteName = palette.name;
     const projectPalettes = `
-      <section class='${palette.id}' data-colors='${JSON.stringify([
+      <section class='saved-palette-${
+        palette.id
+      }' data-colors='${JSON.stringify([
       palette.color1,
       palette.color2,
       palette.color3,
