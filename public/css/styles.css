@@ -79,19 +79,102 @@ body {
   width: 50%;
 }
 
-.controls-div,
-.projects {
-  display: none;
+.circle {
+  position: relative;
+  padding: 0;
+  margin: 1em auto;
+  width: 20em;
+  height: 20em;
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
 }
 
-.small-palette {
-  height: 20%;
-  width: 100%;
+li {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  transform-origin: 0% 100%;
 }
 
-.small-palettes-div {
-  height: 15vh;
-  flex-direction: column;
+.text {
+  width: 200%;
+  height: 200%;
+}
+
+li:first-child {
+  transform: rotate(0deg) skewY(-30deg);
+}
+
+li:nth-child(2) {
+  transform: rotate(60deg) skewY(-30deg);
+}
+
+li:nth-child(3) {
+  transform: rotate(120deg) skewY(-30deg);
+}
+
+li:nth-child(4) {
+  transform: rotate(180deg) skewY(-30deg);
+}
+
+li:nth-child(5) {
+  transform: rotate(240deg) skewY(-30deg);
+}
+
+li:nth-child(6) {
+  transform: rotate(300deg) skewY(-30deg);
+}
+
+li:first-child .text {
+  background: green;
+}
+
+li:nth-child(2) .text {
+  background: tomato;
+}
+
+li:nth-child(3) .text {
+  background: aqua;
+}
+
+li:nth-child(4) .text {
+  background: yellow;
+}
+
+li:nth-child(5) .text {
+  background: orange;
+}
+
+li:nth-child(6) .text {
+  background: purple;
+}
+
+li:nth-child(7) .text {
+  background: cyan;
+}
+
+li:nth-child(8) .text {
+  background: brown;
+}
+
+li:nth-child(9) .text {
+  background: gray;
+}
+
+li:nth-child(10) .text {
+  background: pink;
+}
+
+li:nth-child(11) .text {
+  background: maroon;
+}
+
+li:nth-child(12) .text {
+  background: gold;
 }
 
 .example {

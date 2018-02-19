@@ -272,23 +272,26 @@ function appendPalettes(palettesArray, projectId) {
     ])}'>
         <p class="palette-name">${paletteName}</p>
         <button class="delete-palette">Delete</button>
-        <div class="small-palettes-div">
-        <div style='background-color: ${
-          palette.color1
-        }' class='palette-color-1 small-palette'></div>
-        <div style='background-color: ${
-          palette.color2
-        }' class='palette-color-2 small-palette'></div>
-        <div style='background-color: ${
-          palette.color3
-        }' class='palette-color-3 small-palette'></div>
-        <div style='background-color: ${
-          palette.color4
-        }' class='palette-color-4 small-palette'></div>
-        <div style='background-color: ${
-          palette.color5
-        }' class='palette-color-5 small-palette'></div>
-        </div>
+        <ul class="circle">
+  <li>
+    <div class="text"></div>
+  </li>
+  <li>
+    <div class="text"></div>
+  </li>
+  <li>
+    <div class="text"></div>
+  </li>
+  <li>
+    <div class="text"></div>
+  </li>
+  <li>
+    <div class="text"></div>
+  </li>
+  <li>
+    <div class="text"></div>
+  </li>
+  <ul>
       </section>
     `;
     $(`.append-palette-${projectId}`).append(projectPalettes);
