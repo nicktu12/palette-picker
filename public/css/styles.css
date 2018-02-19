@@ -146,6 +146,18 @@ li:nth-child(6) {
   transform: rotate(300deg) skewY(-30deg);
 }
 
+.new-colors {
+  position: absolute;
+  top: 22px;
+  left: 537px;
+  border: 11px solid black;
+  border-bottom: 1px solid black;
+  color: white;
+  background-color: black;
+  outline-color: black;
+  font-size: 25px;
+}
+
 .example {
   display: inline-block;
   position: absolute;
