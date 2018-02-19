@@ -22,14 +22,18 @@ body {
   width: 100vw;
 }
 
+.hide {
+  display: none;
+}
+
 .palette {
   position: relative;
 }
 
 .palette-squares {
   display: flex;
-  top: 190px;
-  left: 100px;
+  top: 186px;
+  left: 39px;
   position: absolute;
   flex-direction: column;
   justify-content: space-around;
@@ -93,8 +97,8 @@ body {
 .example {
   display: inline-block;
   position: absolute;
-  top: 162px;
-  left: 200px;
+  top: 172px;
+  left: 239px;
   height: 450px;
   width: 450px;
   transform: rotate(90deg);
