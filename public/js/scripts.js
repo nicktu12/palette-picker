@@ -45,20 +45,6 @@ function loadOfflinePalettes(id) {
     .toArray();
 }
 
-// Aperture effect
-
-const apertureEffect = () => {
-  $(".camera-shutter--animation1").toggleClass(
-    "camera-shutter--open camera-shutter--f32"
-  );
-};
-
-$(".camera-shutter--animation1").click(function() {
-  apertureEffect();
-  setTimeout(assignRandomColors, 500);
-  setTimeout(apertureEffect, 500);
-});
-
 // UI Functionality
 
 function getRandomColor() {
@@ -362,6 +348,20 @@ function accordionDisplay() {
     target.addClass("active").slideDown();
   }
 }
+
+// Aperture effect
+
+const apertureEffect = () => {
+  $(".camera-shutter--animation1").toggleClass(
+    "camera-shutter--open camera-shutter--f32"
+  );
+};
+
+$(".new-colors").click(function() {
+  apertureEffect();
+  setTimeout(assignRandomColors, 500);
+  setTimeout(apertureEffect, 500);
+});
 
 // Page load and event listeners
 
