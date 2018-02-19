@@ -354,7 +354,14 @@ function displayPalette() {
 //  });
 //}
 
-function accordionDisplay() {}
+function accordionDisplay() {
+  const target = $(this).children(".small-palettes");
+  const allPanels = $(".small-palettes");
+  if (!target.hasClass("active")) {
+    allPanels.removeClass("active").slideUp();
+    target.addClass("active").slideDown();
+  }
+}
 
 // Page load and event listeners
 
