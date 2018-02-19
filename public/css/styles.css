@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   text-align: center;
+  font-family: monospace;
 }
 
 h1 {
@@ -48,6 +49,8 @@ body {
 }
 
 .palette-squares div p {
+  mix-blend-mode: difference;
+  color: white;
   width: 65px;
   font-size: 0.9em;
   position: absolute;

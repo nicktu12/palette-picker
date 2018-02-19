@@ -370,7 +370,6 @@ $(document).ready(() => {
   fetchProjects();
 });
 
-$(".new-colors").on("click", assignRandomColors);
 $(".lock-button").on("click", lockColor);
 $(".save-project").on("submit", saveProject);
 $(".save-palette").on("submit", savePalette);
