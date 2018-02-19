@@ -270,31 +270,41 @@ function appendPalettes(palettesArray, projectId) {
       palette.color4,
       palette.color5
     ])}'>
-        <p class="palette-name">${paletteName}</p>
-        <ul class="circle">
-  <li>
-    <div style='background-color: ${
-      palette.color6
-    }' class='small-palette'></div>
-  </li>
-  <li>
-  <div style='background-color: ${palette.color1}' class='small-palette'></div>
-  </li>
-  <li>
-  <div style='background-color: ${palette.color2}' class='small-palette'></div>
-  </li>
-  <li>
-  <div style='background-color: ${palette.color3}' class='small-palette'></div>
-  </li>
-  <li>
-  <div style='background-color: ${palette.color4}' class='small-palette'></div>
-  </li>
-  <li>
-  <div style='background-color: ${palette.color5}' class='small-palette'></div>
-  </li>
-  </ul>
-        <button class="delete-palette">Delete</button>
-      </section>
+      <p class="palette-name">${paletteName}</p>
+      <ul class="circle">
+      <li>
+        <div style='background-color: ${
+          palette.color6
+        }' class='small-palette'></div>
+      </li>
+      <li>
+        <div style='background-color: ${
+          palette.color1
+        }' class='small-palette'></div>
+      </li>
+      <li>
+        <div style='background-color: ${
+          palette.color2
+        }' class='small-palette'></div>
+      </li>
+      <li>
+        <div style='background-color: ${
+          palette.color3
+        }' class='small-palette'></div>
+      </li>
+      <li>
+        <div style='background-color: ${
+          palette.color4
+        }' class='small-palette'></div>
+      </li>
+      <li>
+        <div style='background-color: ${
+          palette.color5
+        }' class='small-palette'></div>
+      </li>
+      </ul>
+      <button class="delete-palette">Delete</button>
+    </section>
     `;
     $(`.append-palette-${projectId}`).append(projectPalettes);
   });
