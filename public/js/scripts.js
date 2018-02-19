@@ -207,11 +207,14 @@ function fetchProjects() {
         appendProject(project);
         fetch(`/api/v1/projects/${project.id}/palettes`)
           .then(response => response.json())
-          .then(palettes => appendPalettes(palettes, project.id))
+          .then(palettes => {
+            appendPalettes(palettes, project.id);
+          })
           .catch(error => {
             throw error;
           });
       });
+      $(".saved-project").on("click", accordionDisplay);
     })
     .catch(error => {
       loadOfflineProjects()
@@ -238,7 +241,7 @@ function appendProject(fetchedProject) {
     fetchedProject.name
   }</option>`;
   const project = `
-    <article>
+    <article class="saved-project">
       <h3>${fetchedProject.name}</h3>
       <div class="append-palette-${fetchedProject.id} small-palettes"></div>
     </article>
@@ -251,9 +254,9 @@ function appendProject(fetchedProject) {
 function appendOfflineProject(id, name) {
   const projectName = `<option value=${id}>${name}</option>`;
   const project = `
-    <article>
+    <article class="saved-project">
       <h3>${name}</h3>
-      <div class="append-palette-${id}"></div>
+      <div class="append-palette-${id} small-palettes"></div>
     </article>
   `;
   $(".projects").append(project);
@@ -350,6 +353,8 @@ function displayPalette() {
 //      });
 //  });
 //}
+
+function accordionDisplay() {}
 
 // Page load and event listeners
 
