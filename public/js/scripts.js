@@ -81,9 +81,7 @@ function assignRandomColors() {
 }
 
 function lockColor() {
-  $(this)
-    .parent()
-    .toggleClass("lock");
+  $(this).toggleClass("lock");
 }
 
 function saveProject(event) {
