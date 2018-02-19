@@ -100,7 +100,7 @@ li {
   transform-origin: 0% 100%;
 }
 
-.text {
+.small-palette {
   width: 200%;
   height: 200%;
 }
@@ -127,54 +127,6 @@ li:nth-child(5) {
 
 li:nth-child(6) {
   transform: rotate(300deg) skewY(-30deg);
-}
-
-li:first-child .text {
-  background: green;
-}
-
-li:nth-child(2) .text {
-  background: tomato;
-}
-
-li:nth-child(3) .text {
-  background: aqua;
-}
-
-li:nth-child(4) .text {
-  background: yellow;
-}
-
-li:nth-child(5) .text {
-  background: orange;
-}
-
-li:nth-child(6) .text {
-  background: purple;
-}
-
-li:nth-child(7) .text {
-  background: cyan;
-}
-
-li:nth-child(8) .text {
-  background: brown;
-}
-
-li:nth-child(9) .text {
-  background: gray;
-}
-
-li:nth-child(10) .text {
-  background: pink;
-}
-
-li:nth-child(11) .text {
-  background: maroon;
-}
-
-li:nth-child(12) .text {
-  background: gold;
 }
 
 .example {
