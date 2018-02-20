@@ -84,7 +84,10 @@ body {
 }
 
 .projects {
-  margin-left: 800px;
+  border: 13px solid black;
+  box-sizing: border-box;
+  margin: 8px 8px 8px 850px;
+  height: calc(100vh - 16px);
   display: flex;
   flex-direction: column;
 }
@@ -92,7 +95,7 @@ body {
 .small-palettes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .palette-name {
@@ -164,7 +167,7 @@ li:nth-child(6) {
 .example {
   display: inline-block;
   position: absolute;
-  top: 135px;
+  top: 124px;
   left: 327px;
   height: 450px;
   width: 450px;
