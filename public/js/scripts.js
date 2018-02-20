@@ -70,8 +70,7 @@ function lockColor() {
   $(this).toggleClass("lock");
 }
 
-function saveProject(event) {
-  event.preventDefault();
+function saveProject() {
   const projectName = $(".save-project-input").val();
   fetch("/api/v1/projects", {
     method: "POST",
@@ -85,11 +84,12 @@ function saveProject(event) {
         return response.json();
       }
     })
-    .then(() => {
+    .then(response => {
       $(".save-project-input").val("");
       $(".append-projects").html("");
       $(".project-drop-down").html("");
       fetchProjects();
+      console.log(response);
     })
     .catch(error => {
       throw error;
@@ -119,7 +119,9 @@ function savePalette(event) {
   const projectId = $(
     `#saved-projects option[value="${projectInputValue}"]`
   ).data("value");
-  console.log(name, colorArray, projectId);
+  if (projectId === undefined) {
+    saveProject();
+  }
   fetch("/api/v1/palettes", {
     method: "POST",
     headers: {
@@ -193,6 +195,7 @@ function fetchProjects() {
   fetch("/api/v1/projects")
     .then(response => response.json())
     .then(projects => {
+      $("#saved-projects").html("");
       projects.forEach(project => {
         appendProject(project);
         fetch(`/api/v1/projects/${project.id}/palettes`)
