@@ -116,6 +116,7 @@ function savePalette(event) {
   const color5 = $(".color-5-text").text();
   const colorArray = [color1, color2, color3, color4, color5];
   const projectId = $(".project-drop-down").val();
+  console.log(name, colorArray, projectId);
   fetch("/api/v1/palettes", {
     method: "POST",
     headers: {
@@ -223,9 +224,9 @@ function fetchProjects() {
 }
 
 function appendProject(fetchedProject) {
-  const projectName = `<option value=${fetchedProject.id}>${
+  const projectName = `<option data-value=${fetchedProject.id} value="${
     fetchedProject.name
-  }</option>`;
+  }"></option>`;
   const project = `
     <article class="saved-project">
       <h3>${fetchedProject.name}</h3>
@@ -234,7 +235,7 @@ function appendProject(fetchedProject) {
   `;
   $(".projects").append(project);
   $(".small-palettes").hide();
-  $(".project-drop-down").append(projectName);
+  $("#saved-projects").append(projectName);
 }
 
 function appendOfflineProject(id, name) {
