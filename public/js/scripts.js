@@ -87,7 +87,7 @@ function saveProject(event) {
     })
     .then(() => {
       $(".save-project-input").val("");
-      $(".projects").html("");
+      $(".append-projects").html("");
       $(".project-drop-down").html("");
       fetchProjects();
     })
@@ -115,7 +115,10 @@ function savePalette(event) {
   const color4 = $(".color-4-text").text();
   const color5 = $(".color-5-text").text();
   const colorArray = [color1, color2, color3, color4, color5];
-  const projectId = $(".project-drop-down").val();
+  const projectInputValue = $(".save-project-input").val();
+  const projectId = $(
+    `#saved-projects option[value="${projectInputValue}"]`
+  ).data("value");
   console.log(name, colorArray, projectId);
   fetch("/api/v1/palettes", {
     method: "POST",
@@ -140,7 +143,7 @@ function savePalette(event) {
     .then(() => {
       $(".save-palette-input").val("");
       $(".project-drop-down").html("");
-      $(".projects").html("");
+      $(".append-projects").html("");
       fetchProjects();
     })
     .catch(error => {
@@ -233,7 +236,7 @@ function appendProject(fetchedProject) {
       <div class="append-palette-${fetchedProject.id} small-palettes"></div>
     </article>
   `;
-  $(".projects").append(project);
+  $(".append-projects").append(project);
   $(".small-palettes").hide();
   $("#saved-projects").append(projectName);
 }
