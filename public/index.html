@@ -53,7 +53,12 @@
     </section>
     <div class="controls-div">
       <button class="new-colors control">Generate New Colors</button>
-      <form class="save-project control">
+      <form class="controls-form">
+        <input type="text" placeholder="Project name" class="save-project-input" />
+        <input type="text" placeholder="Palette Name" class="save-project-input" />
+        <input type="submit" value="Save palette" />
+      </form>
+      <!-- <form class="save-project control">
         <p>Create new project</p>
         <input type="text" placeholder="New project name" class="save-project-input" />
         <input type="submit" value="Save project" />
@@ -63,7 +68,7 @@
         </select>
         <input type="text" placeholder="Palette name" class="save-palette-input" />
         <input type="submit" value="Save new palette" />
-      </form>
+      </form> -->
     </div>
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
