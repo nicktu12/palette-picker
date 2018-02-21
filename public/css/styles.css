@@ -143,11 +143,25 @@ body {
 }
 
 .controls-form input {
-  color: red;
+  width: 150px;
+  padding: 5px;
+}
+
+.controls-form button {
+  width: 150px;
+  padding: 5px;
+  background: black;
+  color: white;
+  border: none;
 }
 
 .saved-project h3 {
   cursor: pointer;
+}
+
+.delete-palette {
+  padding: 5px;
+  background: none;
 }
 
 .circle {
