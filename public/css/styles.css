@@ -116,10 +116,13 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin: 5px;
 }
 
 .small-palettes section {
-  border: 2px solid black;
+  border: 1px solid black;
+  padding: 5px;
+  min-width: 125px;
 }
 
 .palette-name {
