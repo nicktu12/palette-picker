@@ -55,11 +55,11 @@
     </section>
     <div class="controls-div">
       <button class="new-colors control">Generate New Colors</button>
-      <form class="controls-form save-palette">
+      <form class="controls-form save-palette" id="save-form">
         <input type="text" list="saved-projects" placeholder="Project name" class="save-project-input" />
         <datalist id="saved-projects"></datalist>
         <input type="text" placeholder="Palette Name" class="save-palette-input" />
-        <input type="submit" value="Save palette" />
+        <button type="submit" form="save-form">Save Palette</button>
       </form>
       <!-- <form class="save-project control">
         <p>Create new project</p>
