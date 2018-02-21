@@ -97,9 +97,6 @@ function saveProject() {
       }
     })
     .then(response => {
-      $(".save-project-input").val("");
-      $(".append-projects").html("");
-      $(".project-drop-down").html("");
       fetchProjects();
       return response.id;
     })
@@ -144,9 +141,6 @@ async function savePalette(event) {
       }
     })
     .then(() => {
-      $(".save-palette-input").val("");
-      $(".project-drop-down").html("");
-      $(".append-projects").html("");
       fetchProjects();
     })
     .catch(error => {
@@ -194,6 +188,9 @@ function buildOfflinePalette(projectId, name, colorArray) {
 }
 
 function fetchProjects() {
+  $(".save-palette-input").val("");
+  $(".project-drop-down").html("");
+  $(".append-projects").html("");
   fetch("/api/v1/projects")
     .then(response => response.json())
     .then(projects => {
@@ -385,7 +382,6 @@ $(document).ready(() => {
 });
 
 $(".lock-button").on("click", lockColor);
-$(".save-project").on("submit", saveProject);
 $(".save-palette").on("submit", savePalette);
 $(".projects").on("click", "button", deletePalette);
 $(".projects").on("click", "section", displayPalette);
