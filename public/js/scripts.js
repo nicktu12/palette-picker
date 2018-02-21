@@ -350,6 +350,8 @@ function accordionDisplay() {
   if (!target.hasClass("active")) {
     allPanels.removeClass("active").slideUp();
     target.addClass("active").slideDown();
+  } else {
+    allPanels.removeClass("active").slideUp();
   }
 }
 
