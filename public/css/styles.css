@@ -58,6 +58,20 @@ body {
   bottom: 0px;
 }
 
+.lock-directions {
+  position: absolute;
+  top: 105px;
+  left: 110px;
+  width: 140px;
+  text-align: left;
+}
+
+.lock-directions span {
+  display: block;
+  text-align: left;
+  padding-top: 10px;
+}
+
 .lock-button {
   width: 100%;
   height: 100%;
