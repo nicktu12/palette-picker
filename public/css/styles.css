@@ -153,6 +153,7 @@ body {
   background: black;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 .saved-project h3 {
@@ -162,6 +163,7 @@ body {
 .delete-palette {
   padding: 5px;
   background: none;
+  cursor: pointer;
 }
 
 .circle {
