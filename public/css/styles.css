@@ -35,8 +35,8 @@ body {
 
 .palette-squares {
   display: flex;
-  top: 94px;
-  left: 48px;
+  top: 87px;
+  left: 43px;
   position: absolute;
   flex-direction: column;
   justify-content: space-around;
@@ -108,10 +108,18 @@ body {
   flex-direction: column;
 }
 
+.saved-project {
+  padding: 5px;
+}
+
 .small-palettes {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.small-palettes section {
+  border: 2px solid black;
 }
 
 .palette-name {
