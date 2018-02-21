@@ -261,9 +261,9 @@ function appendPalettes(palettesArray, projectId) {
   palettesArray.forEach(palette => {
     const paletteName = palette.name;
     const projectPalettes = `
-      <section class='saved-palette-${
-        palette.id
-      }' data-colors='${JSON.stringify([
+      <section id="${palette.id}" class='saved-palette-${
+      palette.id
+    }' data-colors='${JSON.stringify([
       palette.color1,
       palette.color2,
       palette.color3,
@@ -304,22 +304,23 @@ function appendPalettes(palettesArray, projectId) {
         }' class='small-palette'></div>
       </li>
       </ul>
-      <button class="delete-palette">Delete</button>
+      <button class="delete-palette-${palette.id}">Delete</button>
     </section>
     `;
     $(`.append-palette-${projectId}`).append(projectPalettes);
+    $(`.delete-palette-${palette.id}`).on("click", deletePalette);
   });
 }
 
 function deletePalette() {
   const id = $(this)
     .parent()
-    .prop("className");
-
+    .prop("id");
+  console.log($(this), id);
   fetch(`/api/v1/palettes/${id}`, {
     method: "DELETE"
   })
-    .then(() => $(`.${id}`).remove())
+    .then(() => $(`#${id}`).remove())
     .catch(error => {
       throw error;
     });
@@ -383,5 +384,4 @@ $(document).ready(() => {
 
 $(".lock-button").on("click", lockColor);
 $(".save-palette").on("submit", savePalette);
-$(".projects").on("click", "button", deletePalette);
 $(".projects").on("click", "section", displayPalette);
