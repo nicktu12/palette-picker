@@ -20,6 +20,7 @@ function savePaletteToIndexedDB({
   color3,
   color4,
   color5,
+  color6,
   projectId
 }) {
   return db.palettes.add({
@@ -30,6 +31,7 @@ function savePaletteToIndexedDB({
     color3,
     color4,
     color5,
+    color6,
     projectId
   });
 }
@@ -114,7 +116,8 @@ async function savePalette(event) {
   const color3 = $(".color-3-text").text();
   const color4 = $(".color-4-text").text();
   const color5 = $(".color-5-text").text();
-  const colorArray = [color1, color2, color3, color4, color5];
+  const color6 = $(".color-6-text").text();
+  const colorArray = [color1, color2, color3, color4, color5, color6];
   const projectInputValue = $(".save-project-input").val();
   let projectId =
     $(`#saved-projects option[value="${projectInputValue}"]`).data("value") ||
@@ -131,6 +134,7 @@ async function savePalette(event) {
       color3,
       color4,
       color5,
+      color6,
       projectId
     })
   })
@@ -175,6 +179,7 @@ function buildOfflinePalette(projectId, name, colorArray) {
     color3: colorArray[2],
     color4: colorArray[3],
     color5: colorArray[4],
+    color6: colorArray[5],
     projectId
   };
   savePaletteToIndexedDB(builtPalette)
@@ -242,7 +247,9 @@ function appendProject(fetchedProject) {
 }
 
 function appendOfflineProject(id, name) {
-  const projectName = `<option value=${id}>${name}</option>`;
+  const projectName = `<option data-value=${fetchedProject.id} value="${
+    fetchedProject.name
+  }"></option>`;
   const project = `
     <article class="saved-project">
       <h3>${name}</h3>
@@ -264,7 +271,8 @@ function appendPalettes(palettesArray, projectId) {
       palette.color2,
       palette.color3,
       palette.color4,
-      palette.color5
+      palette.color5,
+      palette.color6
     ])}'>
       <p class="palette-name">${paletteName}</p>
       <ul class="circle">
