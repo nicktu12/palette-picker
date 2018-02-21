@@ -130,6 +130,10 @@ body {
   align-items: center;
 }
 
+.controls-form input {
+  color: red;
+}
+
 .circle {
   position: relative;
   padding: 0;
