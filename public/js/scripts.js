@@ -72,7 +72,17 @@ function lockColor() {
 
 function saveProject() {
   const projectName = $(".save-project-input").val();
-  fetch("/api/v1/projects", {
+  const id = Date.now();
+  saveProjectToIndexedDB(id, projectName)
+    .then(project => {
+      if (!navigator.onLine) {
+        appendOfflineProject(project, projectName);
+      }
+    })
+    .catch(error => {
+      throw error;
+    });
+  return fetch("/api/v1/projects", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -89,24 +99,14 @@ function saveProject() {
       $(".append-projects").html("");
       $(".project-drop-down").html("");
       fetchProjects();
-      console.log(response);
-    })
-    .catch(error => {
-      throw error;
-    });
-  const id = Date.now();
-  saveProjectToIndexedDB(id, projectName)
-    .then(project => {
-      if (!navigator.onLine) {
-        appendOfflineProject(project, projectName);
-      }
+      return response.id;
     })
     .catch(error => {
       throw error;
     });
 }
 
-function savePalette(event) {
+async function savePalette(event) {
   event.preventDefault();
   const name = $(".save-palette-input").val();
   const color1 = $(".color-1-text").text();
@@ -116,12 +116,9 @@ function savePalette(event) {
   const color5 = $(".color-5-text").text();
   const colorArray = [color1, color2, color3, color4, color5];
   const projectInputValue = $(".save-project-input").val();
-  const projectId = $(
-    `#saved-projects option[value="${projectInputValue}"]`
-  ).data("value");
-  if (projectId === undefined) {
-    saveProject();
-  }
+  let projectId =
+    $(`#saved-projects option[value="${projectInputValue}"]`).data("value") ||
+    (await saveProject());
   fetch("/api/v1/palettes", {
     method: "POST",
     headers: {
