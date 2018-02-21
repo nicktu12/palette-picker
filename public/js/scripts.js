@@ -339,18 +339,20 @@ function displayPalette() {
 
 // Service Worker registration
 
-//if ('serviceWorker' in navigator) {
-//  window.addEventListener('load', () => {
-//    navigator.serviceWorker.register('../service-worker.js')
-//      .then(registration => navigator.serviceWorker.ready)
-//      .then(registration => {
-//        Notification.requestPermission();
-//        console.log('ServiceWorker registration successful');
-//      }).catch(error => {
-//        console.log(`ServiceWorker registration failed: ${error}`);
-//      });
-//  });
-//}
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("../service-worker.js")
+      .then(registration => navigator.serviceWorker.ready)
+      .then(registration => {
+        Notification.requestPermission();
+        console.log("ServiceWorker registration successful");
+      })
+      .catch(error => {
+        console.log(`ServiceWorker registration failed: ${error}`);
+      });
+  });
+}
 
 function accordionDisplay() {
   const target = $(this).children(".small-palettes");
