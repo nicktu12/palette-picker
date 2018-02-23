@@ -2,7 +2,7 @@
 
 Palette Picker is a single page application that allows a user to save randomly generated color palettes to a backend built with Node.js and Express. The front end application was built using jQuery. Users are able to create new projects and palettes, as well as delete palettes from the database. 
 
-![palette picker](https://user-images.githubusercontent.com/26471447/33584995-4798003e-d91f-11e7-8440-c4e52127af00.gif)
+![pp](https://user-images.githubusercontent.com/26471447/36620871-6702529e-18b2-11e8-91d6-9cfe69e997dc.gif)
 
 [Palette Picker on Heroku](https://nt-palettepicker-171201.herokuapp.com/)
 
