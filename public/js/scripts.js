@@ -116,7 +116,7 @@ async function savePalette(event) {
   const color6 = $(".color-6-text").text();
   const colorArray = [color1, color2, color3, color4, color5, color6];
   const projectInputValue = $(".save-project-input").val();
-  let projectId =
+  const projectId =
     $(`#saved-projects option[value="${projectInputValue}"]`).data("value") ||
     (await saveProject());
   fetch("/api/v1/palettes", {
