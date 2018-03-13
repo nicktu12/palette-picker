@@ -200,7 +200,7 @@ describe("API routes", () => {
         });
     });
 
-    it("should return 422 if palette is not found in database", done => {
+    it("should return 404 if palette is not found in database", done => {
       chai
         .request(server)
         .delete("/api/v1/palettes/1212")
