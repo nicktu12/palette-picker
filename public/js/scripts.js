@@ -187,6 +187,17 @@ function buildOfflinePalette(projectId, name, colorArray) {
     });
 }
 
+function fetchPalettesToAppend(projectId) {
+  fetch(`/api/v1/projects/${projectId}/palettes`)
+    .then(response => response.json())
+    .then(palettes => {
+      appendPalettes(palettes, projectId);
+    })
+    .catch(error => {
+      throw error;
+    });
+}
+
 function fetchProjects() {
   $(".save-palette-input").val("");
   $(".project-drop-down").html("");
@@ -197,14 +208,7 @@ function fetchProjects() {
       $("#saved-projects").html("");
       projects.forEach(project => {
         appendProject(project);
-        fetch(`/api/v1/projects/${project.id}/palettes`)
-          .then(response => response.json())
-          .then(palettes => {
-            appendPalettes(palettes, project.id);
-          })
-          .catch(error => {
-            throw error;
-          });
+        fetchPalettesToAppend(project.id);
       });
       $(".saved-project").on("click", accordionDisplay);
     })
