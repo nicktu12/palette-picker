@@ -1,6 +1,8 @@
 # Palette Picker
 
-Palette Picker is a single page application that allows a user to save randomly generated color palettes to a backend built with Node.js and Express. The front end application was built using jQuery. Users are able to create new projects and palettes, as well as delete palettes from the database. 
+[![CircleCI](https://circleci.com/gh/nicktu12/palette-picker/tree/master.svg?style=svg)](https://circleci.com/gh/nicktu12/palette-picker/tree/master)
+
+Palette Picker is a single page application that allows a user to save randomly generated color palettes to a backend built with Node.js and Express. The front end application was built using jQuery. Users are able to create new projects and palettes, as well as delete palettes from the database.
 
 ![pp](https://user-images.githubusercontent.com/26471447/36620871-6702529e-18b2-11e8-91d6-9cfe69e997dc.gif)
 
@@ -18,7 +20,7 @@ node server.js
 
 [Find out more about installing node.js](https://nodejs.org/en/download/package-manager/)
 
-The following development dependencies are needed in your package.json in order to run the test suite. 
+The following development dependencies are needed in your package.json in order to run the test suite.
 
 ```
   "devDependencies": {
@@ -32,13 +34,11 @@ The following development dependencies are needed in your package.json in order 
 
 Install node (see link above)
 
-Start the server using the following bash command. 
+Start the server using the following bash command.
 
 ```
 node server.js
 ```
-
-
 
 ## Running the tests
 
@@ -48,8 +48,7 @@ The following script can be used to run the test suite
 npm run test
 ```
 
-The test suite ensures that the app serves a static html page and handles error for incorrect url routing. All endpoints defined on the server are tested before continuously integrating with CircleCI. 
-
+The test suite ensures that the app serves a static html page and handles error for incorrect url routing. All endpoints defined on the server are tested before continuously integrating with CircleCI.
 
 ## Built With
 
@@ -57,7 +56,6 @@ The test suite ensures that the app serves a static html page and handles error 
 * [Node.js](https://nodejs.org/en/) - Database management
 * [Postgres](https://www.postgresql.org/) - Database
 * [Express](https://expressjs.com/) - Library for Node.js
-
 
 ## Authors
 
