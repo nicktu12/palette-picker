@@ -10,7 +10,7 @@ Palette Picker is a single page application that allows a user to save randomly 
 
 ## Getting Started
 
-Palette Picker was created using jQuery, Node.js and Express. To install Palette Picker locally, clone down this repository and use node or nodemon to start the server.js file, which serves a static HTML page containing the application.
+Palette Picker was created using jQuery, Node.js and Express. To install Palette Picker locally, clone down this repository, install dependencies with `npm install` in the command line, and use node or nodemon to start the server.js file, which serves a static HTML page containing the application.
 
 ```
 node server.js
